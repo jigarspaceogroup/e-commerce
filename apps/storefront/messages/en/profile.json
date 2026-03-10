@@ -1,0 +1,72 @@
+{
+  "profile": {
+    "title": "My Account",
+    "settings": {
+      "title": "Account Settings",
+      "personalInfo": "Personal Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "preferNotToSay": "Prefer not to say",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updateProfile": "Update Profile",
+      "profileUpdated": "Your profile has been updated.",
+      "deleteAccount": "Delete Account",
+      "deleteAccountWarning": "This action is permanent and cannot be undone. All your data will be deleted.",
+      "deleteAccountConfirm": "Are you sure you want to delete your account?",
+      "notifications": "Notification Preferences",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications",
+      "orderUpdates": "Order Updates",
+      "promotions": "Promotions & Offers",
+      "newsletter": "Newsletter"
+    },
+    "addresses": {
+      "title": "My Addresses",
+      "addAddress": "Add New Address",
+      "editAddress": "Edit Address",
+      "deleteAddress": "Delete Address",
+      "deleteConfirm": "Are you sure you want to delete this address?",
+      "setDefault": "Set as Default",
+      "defaultBadge": "Default",
+      "noAddresses": "You haven't saved any addresses yet.",
+      "addressLabel": "Address Label",
+      "home": "Home",
+      "work": "Work",
+      "other": "Other",
+      "addressSaved": "Address saved successfully.",
+      "addressDeleted": "Address deleted."
+    },
+    "wishlist": {
+      "title": "My Wishlist",
+      "empty": "Your wishlist is empty.",
+      "emptyMessage": "Save items you love to your wishlist and come back to them anytime.",
+      "addToCart": "Add to Cart",
+      "remove": "Remove",
+      "removeConfirm": "Remove this item from your wishlist?",
+      "itemCount": "{count} {count, plural, one {item} other {items}}",
+      "addedToWishlist": "Added to wishlist.",
+      "removedFromWishlist": "Removed from wishlist.",
+      "shareWishlist": "Share Wishlist",
+      "outOfStock": "Out of Stock",
+      "priceDropAlert": "Price Drop!"
+    },
+    "sidebar": {
+      "orders": "My Orders",
+      "wishlist": "Wishlist",
+      "addresses": "Addresses",
+      "settings": "Settings",
+      "wallet": "Wallet",
+      "rewards": "Rewards",
+      "support": "Support"
+    }
+  }
+}

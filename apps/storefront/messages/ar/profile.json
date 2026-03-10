@@ -1,0 +1,72 @@
+{
+  "profile": {
+    "title": "حسابي",
+    "settings": {
+      "title": "إعدادات الحساب",
+      "personalInfo": "المعلومات الشخصية",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الجوال",
+      "dateOfBirth": "تاريخ الميلاد",
+      "gender": "الجنس",
+      "male": "ذكر",
+      "female": "أنثى",
+      "preferNotToSay": "أفضّل عدم الإفصاح",
+      "changePassword": "تغيير كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "updateProfile": "تحديث الملف الشخصي",
+      "profileUpdated": "تم تحديث ملفك الشخصي.",
+      "deleteAccount": "حذف الحساب",
+      "deleteAccountWarning": "هذا الإجراء نهائي ولا يمكن التراجع عنه. سيتم حذف جميع بياناتك.",
+      "deleteAccountConfirm": "هل أنت متأكد من حذف حسابك؟",
+      "notifications": "إعدادات الإشعارات",
+      "emailNotifications": "إشعارات البريد الإلكتروني",
+      "smsNotifications": "إشعارات الرسائل النصية",
+      "orderUpdates": "تحديثات الطلبات",
+      "promotions": "العروض والتخفيضات",
+      "newsletter": "النشرة البريدية"
+    },
+    "addresses": {
+      "title": "عناويني",
+      "addAddress": "إضافة عنوان جديد",
+      "editAddress": "تعديل العنوان",
+      "deleteAddress": "حذف العنوان",
+      "deleteConfirm": "هل أنت متأكد من حذف هذا العنوان؟",
+      "setDefault": "تعيين كافتراضي",
+      "defaultBadge": "افتراضي",
+      "noAddresses": "لم تحفظ أي عناوين بعد.",
+      "addressLabel": "تسمية العنوان",
+      "home": "المنزل",
+      "work": "العمل",
+      "other": "أخرى",
+      "addressSaved": "تم حفظ العنوان بنجاح.",
+      "addressDeleted": "تم حذف العنوان."
+    },
+    "wishlist": {
+      "title": "المفضلة",
+      "empty": "قائمة المفضلة فارغة.",
+      "emptyMessage": "احفظ المنتجات التي تعجبك في المفضلة وعد إليها في أي وقت.",
+      "addToCart": "أضف إلى السلة",
+      "remove": "إزالة",
+      "removeConfirm": "إزالة هذا المنتج من المفضلة؟",
+      "itemCount": "{count} {count, plural, one {منتج} two {منتجان} few {منتجات} other {منتج}}",
+      "addedToWishlist": "تمت الإضافة إلى المفضلة.",
+      "removedFromWishlist": "تمت الإزالة من المفضلة.",
+      "shareWishlist": "مشاركة المفضلة",
+      "outOfStock": "غير متوفر",
+      "priceDropAlert": "انخفاض في السعر!"
+    },
+    "sidebar": {
+      "orders": "طلباتي",
+      "wishlist": "المفضلة",
+      "addresses": "العناوين",
+      "settings": "الإعدادات",
+      "wallet": "المحفظة",
+      "rewards": "المكافآت",
+      "support": "الدعم"
+    }
+  }
+}
