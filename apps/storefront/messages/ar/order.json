@@ -1,0 +1,77 @@
+{
+  "order": {
+    "history": {
+      "title": "طلباتي",
+      "noOrders": "لم تقم بأي طلبات بعد.",
+      "orderNumber": "طلب #{number}",
+      "orderDate": "بتاريخ {date}",
+      "orderTotal": "الإجمالي: {total}",
+      "itemCount": "{count} {count, plural, one {منتج} two {منتجان} few {منتجات} other {منتج}}",
+      "viewDetails": "عرض التفاصيل",
+      "reorder": "إعادة الطلب",
+      "filterAll": "جميع الطلبات",
+      "filterActive": "الطلبات النشطة",
+      "filterCompleted": "المكتملة",
+      "filterCancelled": "الملغاة"
+    },
+    "detail": {
+      "title": "تفاصيل الطلب",
+      "orderNumber": "طلب #{number}",
+      "orderDate": "تاريخ الطلب",
+      "orderStatus": "حالة الطلب",
+      "shippingAddress": "عنوان الشحن",
+      "paymentMethod": "طريقة الدفع",
+      "subtotal": "المجموع الفرعي",
+      "shipping": "الشحن",
+      "discount": "الخصم",
+      "vat": "ضريبة القيمة المضافة (15%)",
+      "total": "الإجمالي",
+      "items": "المنتجات",
+      "quantity": "الكمية: {count}",
+      "invoice": "تحميل الفاتورة",
+      "help": "تحتاج مساعدة؟",
+      "contactSupport": "تواصل مع الدعم"
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "confirmed": "تم التأكيد",
+      "processing": "قيد المعالجة",
+      "shipped": "تم الشحن",
+      "outForDelivery": "جاري التوصيل",
+      "delivered": "تم التوصيل",
+      "cancelled": "ملغي",
+      "refunded": "تم الاسترجاع",
+      "returned": "مرتجع",
+      "partiallyShipped": "شحن جزئي"
+    },
+    "tracking": {
+      "title": "تتبع طلبك",
+      "trackingNumber": "رقم التتبع: {number}",
+      "carrier": "شركة الشحن: {carrier}",
+      "estimatedDelivery": "التوصيل المتوقع: {date}",
+      "trackWithCarrier": "التتبع عبر شركة الشحن",
+      "delivered": "تم توصيل طلبك.",
+      "inTransit": "طلبك في الطريق.",
+      "timeline": "مراحل الشحن"
+    },
+    "returns": {
+      "title": "الإرجاع والاسترداد",
+      "requestReturn": "طلب إرجاع",
+      "returnReason": "سبب الإرجاع",
+      "reasonDefective": "المنتج معيب أو تالف",
+      "reasonWrong": "تم استلام منتج خاطئ",
+      "reasonNotAsDescribed": "المنتج لا يطابق الوصف",
+      "reasonNoLongerNeeded": "لم أعد بحاجة إليه",
+      "reasonOther": "سبب آخر",
+      "additionalComments": "ملاحظات إضافية",
+      "submitReturn": "إرسال طلب الإرجاع",
+      "returnPolicy": "سياسة الإرجاع",
+      "returnSubmitted": "تم إرسال طلب الإرجاع.",
+      "returnApproved": "تمت الموافقة على طلب الإرجاع.",
+      "returnRejected": "تم رفض طلب الإرجاع.",
+      "refundProcessing": "جاري معالجة المبلغ المسترد.",
+      "refundCompleted": "تم استرداد مبلغ {amount}.",
+      "returnDeadline": "يجب طلب الإرجاع خلال {days} يوماً من تاريخ التوصيل."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "error": {
+    "pages": {
+      "notFound": {
+        "title": "Page Not Found",
+        "message": "Sorry, the page you're looking for doesn't exist or has been moved.",
+        "backHome": "Go to Homepage"
+      },
+      "serverError": {
+        "title": "Something Went Wrong",
+        "message": "We're having trouble loading this page. Please try again later.",
+        "retry": "Try Again"
+      },
+      "maintenance": {
+        "title": "Under Maintenance",
+        "message": "We're performing scheduled maintenance. We'll be back shortly."
+      },
+      "forbidden": {
+        "title": "Access Denied",
+        "message": "You don't have permission to access this page."
+      }
+    },
+    "form": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "invalidPostalCode": "Please enter a valid postal code",
+      "passwordTooShort": "Password must be at least {min} characters",
+      "passwordMismatch": "Passwords do not match",
+      "invalidCardNumber": "Please enter a valid card number",
+      "invalidExpiry": "Please enter a valid expiry date",
+      "invalidCvv": "Please enter a valid CVV",
+      "minLength": "Must be at least {min} characters",
+      "maxLength": "Must be no more than {max} characters",
+      "minValue": "Must be at least {min}",
+      "maxValue": "Must be no more than {max}",
+      "invalidUrl": "Please enter a valid URL",
+      "fileTooLarge": "File size must be less than {size}",
+      "invalidFileType": "Invalid file type. Allowed types: {types}",
+      "termsRequired": "You must agree to the terms and conditions"
+    },
+    "api": {
+      "networkError": "Network error. Please check your internet connection.",
+      "timeout": "The request timed out. Please try again.",
+      "serverError": "An unexpected error occurred. Please try again later.",
+      "unauthorized": "Your session has expired. Please sign in again.",
+      "forbidden": "You don't have permission to perform this action.",
+      "notFound": "The requested resource was not found.",
+      "conflict": "This action conflicts with the current state. Please refresh and try again.",
+      "rateLimited": "Too many requests. Please wait a moment and try again.",
+      "paymentFailed": "Payment failed. Please check your payment details and try again.",
+      "outOfStock": "One or more items in your cart are no longer available.",
+      "cartExpired": "Your cart has expired. Please add items again."
+    }
+  }
+}

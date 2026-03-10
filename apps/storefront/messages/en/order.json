@@ -1,0 +1,77 @@
+{
+  "order": {
+    "history": {
+      "title": "My Orders",
+      "noOrders": "You haven't placed any orders yet.",
+      "orderNumber": "Order #{number}",
+      "orderDate": "Placed on {date}",
+      "orderTotal": "Total: {total}",
+      "itemCount": "{count} {count, plural, one {item} other {items}}",
+      "viewDetails": "View Details",
+      "reorder": "Reorder",
+      "filterAll": "All Orders",
+      "filterActive": "Active",
+      "filterCompleted": "Completed",
+      "filterCancelled": "Cancelled"
+    },
+    "detail": {
+      "title": "Order Details",
+      "orderNumber": "Order #{number}",
+      "orderDate": "Order Date",
+      "orderStatus": "Order Status",
+      "shippingAddress": "Shipping Address",
+      "paymentMethod": "Payment Method",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "discount": "Discount",
+      "vat": "VAT (15%)",
+      "total": "Total",
+      "items": "Items",
+      "quantity": "Qty: {count}",
+      "invoice": "Download Invoice",
+      "help": "Need Help?",
+      "contactSupport": "Contact Support"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "outForDelivery": "Out for Delivery",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded",
+      "returned": "Returned",
+      "partiallyShipped": "Partially Shipped"
+    },
+    "tracking": {
+      "title": "Track Your Order",
+      "trackingNumber": "Tracking Number: {number}",
+      "carrier": "Carrier: {carrier}",
+      "estimatedDelivery": "Estimated Delivery: {date}",
+      "trackWithCarrier": "Track with Carrier",
+      "delivered": "Your order has been delivered.",
+      "inTransit": "Your order is on its way.",
+      "timeline": "Shipment Timeline"
+    },
+    "returns": {
+      "title": "Returns & Refunds",
+      "requestReturn": "Request a Return",
+      "returnReason": "Reason for Return",
+      "reasonDefective": "Defective or damaged item",
+      "reasonWrong": "Wrong item received",
+      "reasonNotAsDescribed": "Item not as described",
+      "reasonNoLongerNeeded": "No longer needed",
+      "reasonOther": "Other",
+      "additionalComments": "Additional Comments",
+      "submitReturn": "Submit Return Request",
+      "returnPolicy": "View Return Policy",
+      "returnSubmitted": "Your return request has been submitted.",
+      "returnApproved": "Your return has been approved.",
+      "returnRejected": "Your return request has been declined.",
+      "refundProcessing": "Your refund is being processed.",
+      "refundCompleted": "Your refund of {amount} has been issued.",
+      "returnDeadline": "Returns must be requested within {days} days of delivery."
+    }
+  }
+}

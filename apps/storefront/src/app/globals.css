@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Design Tokens */
+@theme {
+  /* Brand Colors */
+  --color-brand-primary-50: #f0f7ff;
+  --color-brand-primary-100: #e0effe;
+  --color-brand-primary-200: #b9dffd;
+  --color-brand-primary-300: #7cc5fc;
+  --color-brand-primary-400: #36a9f8;
+  --color-brand-primary-500: #0c8ee9;
+  --color-brand-primary-600: #0070c7;
+  --color-brand-primary-700: #0059a1;
+  --color-brand-primary-800: #054c85;
+  --color-brand-primary-900: #04406e;
+
+  --color-brand-secondary-500: #8b5cf6;
+  --color-brand-secondary-600: #7c3aed;
+  --color-brand-secondary-700: #6d28d9;
+
+  --color-brand-accent-500: #f97316;
+  --color-brand-accent-600: #ea580c;
+
+  /* Semantic Colors */
+  --color-success: #16a34a;
+  --color-warning: #eab308;
+  --color-error: #dc2626;
+  --color-info: #0284c7;
+
+  /* Typography */
+  --font-sans: "Inter", "IBM Plex Sans Arabic", sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* RTL-specific overrides using logical properties */
+[dir="rtl"] {
+  font-family: var(--font-arabic);
+}

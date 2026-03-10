@@ -1,0 +1,21 @@
+{
+  "name": "e-commerce",
+  "private": true,
+  "packageManager": "pnpm@10.32.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "turbo": "^2.8.15",
+    "typescript": "^5.9.3"
+  }
+}

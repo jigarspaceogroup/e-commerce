@@ -1,0 +1,82 @@
+{
+  "checkout": {
+    "title": "إتمام الشراء",
+    "steps": {
+      "shipping": "الشحن",
+      "payment": "الدفع",
+      "review": "المراجعة",
+      "confirmation": "التأكيد"
+    },
+    "shipping": {
+      "title": "عنوان الشحن",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "addressLine1": "العنوان - السطر الأول",
+      "addressLine2": "العنوان - السطر الثاني (اختياري)",
+      "city": "المدينة",
+      "state": "المنطقة",
+      "postalCode": "الرمز البريدي",
+      "country": "الدولة",
+      "phone": "رقم الجوال",
+      "email": "البريد الإلكتروني",
+      "savedAddresses": "العناوين المحفوظة",
+      "addNewAddress": "إضافة عنوان جديد",
+      "editAddress": "تعديل العنوان",
+      "deleteAddress": "حذف العنوان",
+      "setDefault": "تعيين كافتراضي",
+      "defaultAddress": "العنوان الافتراضي",
+      "useThisAddress": "استخدام هذا العنوان",
+      "shippingMethod": "طريقة الشحن",
+      "standard": "شحن عادي",
+      "express": "شحن سريع",
+      "sameDay": "توصيل في نفس اليوم",
+      "standardDelivery": "التوصيل خلال {min}–{max} أيام عمل",
+      "expressDelivery": "التوصيل خلال {min}–{max} أيام عمل",
+      "sameDayDelivery": "التوصيل اليوم قبل الساعة {time}"
+    },
+    "payment": {
+      "title": "طريقة الدفع",
+      "creditCard": "بطاقة ائتمان / مدى",
+      "cardNumber": "رقم البطاقة",
+      "expiryDate": "تاريخ الانتهاء",
+      "cvv": "رمز الأمان",
+      "nameOnCard": "الاسم على البطاقة",
+      "savedCards": "البطاقات المحفوظة",
+      "addNewCard": "إضافة بطاقة جديدة",
+      "mada": "مدى",
+      "applePay": "Apple Pay",
+      "stcPay": "STC Pay",
+      "tabby": "تابي - تقسيط بدون فوائد",
+      "tamara": "تمارا - اشترِ الآن وادفع لاحقاً",
+      "cashOnDelivery": "الدفع عند الاستلام",
+      "codFee": "رسوم الدفع عند الاستلام: {fee}",
+      "saveCard": "حفظ البطاقة للمشتريات المستقبلية",
+      "securePayment": "معلومات الدفع مشفرة وآمنة."
+    },
+    "review": {
+      "title": "مراجعة طلبك",
+      "orderSummary": "ملخص الطلب",
+      "shippingAddress": "عنوان الشحن",
+      "paymentMethod": "طريقة الدفع",
+      "editCart": "تعديل السلة",
+      "subtotal": "المجموع الفرعي",
+      "shipping": "الشحن",
+      "discount": "الخصم",
+      "vat": "ضريبة القيمة المضافة (15%)",
+      "total": "الإجمالي",
+      "placeOrder": "تأكيد الطلب",
+      "agreeTerms": "بتأكيد الطلب، أنت توافق على {terms} و{privacy}.",
+      "itemCount": "{count} {count, plural, one {منتج} two {منتجان} few {منتجات} other {منتج}}"
+    },
+    "confirmation": {
+      "title": "تم تأكيد الطلب!",
+      "thankYou": "شكراً لطلبك!",
+      "orderNumber": "رقم الطلب: {number}",
+      "confirmationEmail": "تم إرسال تأكيد الطلب إلى {email}.",
+      "estimatedDelivery": "التوصيل المتوقع: {date}",
+      "trackOrder": "تتبع الطلب",
+      "continueShopping": "متابعة التسوق",
+      "orderDetails": "عرض تفاصيل الطلب"
+    }
+  }
+}

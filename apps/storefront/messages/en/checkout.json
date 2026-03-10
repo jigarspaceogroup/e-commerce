@@ -1,0 +1,82 @@
+{
+  "checkout": {
+    "title": "Checkout",
+    "steps": {
+      "shipping": "Shipping",
+      "payment": "Payment",
+      "review": "Review",
+      "confirmation": "Confirmation"
+    },
+    "shipping": {
+      "title": "Shipping Address",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2 (Optional)",
+      "city": "City",
+      "state": "State / Region",
+      "postalCode": "Postal Code",
+      "country": "Country",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "savedAddresses": "Saved Addresses",
+      "addNewAddress": "Add New Address",
+      "editAddress": "Edit Address",
+      "deleteAddress": "Delete Address",
+      "setDefault": "Set as Default",
+      "defaultAddress": "Default Address",
+      "useThisAddress": "Use This Address",
+      "shippingMethod": "Shipping Method",
+      "standard": "Standard Shipping",
+      "express": "Express Shipping",
+      "sameDay": "Same Day Delivery",
+      "standardDelivery": "Delivered in {min}–{max} business days",
+      "expressDelivery": "Delivered in {min}–{max} business days",
+      "sameDayDelivery": "Delivered today before {time}"
+    },
+    "payment": {
+      "title": "Payment Method",
+      "creditCard": "Credit / Debit Card",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV",
+      "nameOnCard": "Name on Card",
+      "savedCards": "Saved Cards",
+      "addNewCard": "Add New Card",
+      "mada": "Mada",
+      "applePay": "Apple Pay",
+      "stcPay": "STC Pay",
+      "tabby": "Tabby - Pay in Installments",
+      "tamara": "Tamara - Buy Now Pay Later",
+      "cashOnDelivery": "Cash on Delivery",
+      "codFee": "Cash on delivery fee: {fee}",
+      "saveCard": "Save this card for future purchases",
+      "securePayment": "Your payment information is encrypted and secure."
+    },
+    "review": {
+      "title": "Review Your Order",
+      "orderSummary": "Order Summary",
+      "shippingAddress": "Shipping Address",
+      "paymentMethod": "Payment Method",
+      "editCart": "Edit Cart",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "discount": "Discount",
+      "vat": "VAT (15%)",
+      "total": "Total",
+      "placeOrder": "Place Order",
+      "agreeTerms": "By placing this order, you agree to our {terms} and {privacy}.",
+      "itemCount": "{count} {count, plural, one {item} other {items}}"
+    },
+    "confirmation": {
+      "title": "Order Confirmed!",
+      "thankYou": "Thank you for your order!",
+      "orderNumber": "Order Number: {number}",
+      "confirmationEmail": "A confirmation email has been sent to {email}.",
+      "estimatedDelivery": "Estimated Delivery: {date}",
+      "trackOrder": "Track Order",
+      "continueShopping": "Continue Shopping",
+      "orderDetails": "View Order Details"
+    }
+  }
+}
