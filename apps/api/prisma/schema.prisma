@@ -28,6 +28,8 @@ model User {
   createdAt         DateTime  @default(now()) @map("created_at")
   updatedAt         DateTime  @updatedAt @map("updated_at")
   deletedAt         DateTime? @map("deleted_at")
+  mfaSecret         String?   @map("mfa_secret")
+  mfaEnabled        Boolean   @default(false) @map("mfa_enabled")
 
   addresses        Address[]
   socialAccounts   UserSocialAccount[]
@@ -41,8 +43,27 @@ model User {
   auditLogs        AuditLog[]        @relation("AuditActor")
   assignedTickets  SupportTicket[]   @relation("AssignedAgent")
   refundsProcessed Refund[]          @relation("RefundProcessor")
+  loginEvents      LoginEvent[]
 
   @@map("users")
+}
+
+model LoginEvent {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String?  @map("user_id") @db.Uuid
+  email         String?
+  phone         String?
+  success       Boolean
+  ip            String
+  userAgent     String   @map("user_agent")
+  failureReason String?  @map("failure_reason")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("login_events")
 }
 
 model UserSocialAccount {
@@ -767,6 +788,7 @@ enum Language {
 
 enum UserStatus {
   active
+  pending_verification
   suspended
   deleted
 }

@@ -14,6 +14,8 @@ export interface User {
   emailVerifiedAt?: Date;
   phoneVerifiedAt?: Date;
   lastLoginAt?: Date;
+  mfaSecret?: string;
+  mfaEnabled: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
