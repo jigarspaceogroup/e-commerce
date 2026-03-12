@@ -11,7 +11,7 @@ export function auditMiddleware(action: string, entityType: string) {
           actorIp: req.ip ?? "unknown",
           action,
           entityType,
-          entityId: req.params.id ?? "N/A",
+          entityId: (req.params.id as string) ?? "N/A",
           afterValue: body,
         }).catch((err) => console.error("[Audit] Failed:", err));
       }
