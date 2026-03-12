@@ -14,6 +14,7 @@
     "@repo/types": "workspace:*",
     "@repo/utils": "workspace:*",
     "@tailwindcss/postcss": "^4.2.1",
+    "@tanstack/react-query": "^5.90.21",
     "next": "^16.1.6",
     "next-intl": "^4.8.3",
     "postcss": "^8.5.8",

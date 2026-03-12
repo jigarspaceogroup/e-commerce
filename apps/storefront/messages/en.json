@@ -1,0 +1,81 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Back",
+    "or": "or"
+  },
+  "nav": {
+    "home": "Home",
+    "categories": "Categories",
+    "cart": "Cart",
+    "account": "Account",
+    "search": "Search products...",
+    "login": "Login",
+    "register": "Create Account",
+    "logout": "Logout",
+    "profile": "My Profile",
+    "orders": "My Orders",
+    "wishlist": "Wishlist"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Join us today",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+966 5XX XXX XXXX",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signInWith": "Sign in with {provider}",
+    "emailTab": "Email",
+    "phoneTab": "Phone",
+    "registerButton": "Create Account",
+    "loginButton": "Sign In",
+    "otpTitle": "Enter Verification Code",
+    "otpSubtitle": "We sent a 6-digit code to {destination}",
+    "otpResend": "Resend Code",
+    "otpResendIn": "Resend in {seconds}s",
+    "verifyEmail": "Verify Your Email",
+    "verifyEmailMessage": "We sent a verification link to {email}. Please check your inbox.",
+    "forgotPasswordTitle": "Reset Password",
+    "forgotPasswordSubtitle": "Enter your email to receive a reset link",
+    "forgotPasswordSent": "If an account exists with that email, you will receive a reset link.",
+    "resetPasswordTitle": "Set New Password",
+    "resetPasswordButton": "Reset Password",
+    "passwordStrength": {
+      "weak": "Weak",
+      "fair": "Fair",
+      "good": "Good",
+      "strong": "Strong"
+    },
+    "errors": {
+      "invalidEmail": "Please enter a valid email",
+      "weakPassword": "Password must be at least 8 characters with one uppercase and one number",
+      "emailTaken": "This email is already registered",
+      "phoneTaken": "This phone number is already registered",
+      "invalidCredentials": "Invalid email or password",
+      "accountLocked": "Account locked. Try again in {minutes} minutes",
+      "emailNotVerified": "Please verify your email first",
+      "invalidOtp": "Invalid verification code",
+      "expiredToken": "This link has expired"
+    }
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "shipping": "Shipping & Returns",
+    "copyright": "\u00a9 2026 Store. All rights reserved."
+  }
+}
