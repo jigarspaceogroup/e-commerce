@@ -6,13 +6,18 @@ const passwordSchema = z
   .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
   .regex(/[0-9]/, "Password must contain at least one number");
 
+const recaptchaTokenSchema =
+  process.env.NODE_ENV === "production"
+    ? z.string().min(1, "reCAPTCHA token required")
+    : z.string().optional().default("");
+
 export const emailRegisterSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: passwordSchema,
   firstName: z.string().min(1, "First name is required").max(50),
   lastName: z.string().min(1, "Last name is required").max(50),
   preferredLanguage: z.enum(["ar", "en"]).default("ar"),
-  recaptchaToken: z.string().min(1, "reCAPTCHA token required"),
+  recaptchaToken: recaptchaTokenSchema,
 });
 
 export const phoneRegisterSchema = z.object({
@@ -20,7 +25,7 @@ export const phoneRegisterSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50),
   lastName: z.string().max(50).optional(),
   preferredLanguage: z.enum(["ar", "en"]).default("ar"),
-  recaptchaToken: z.string().min(1, "reCAPTCHA token required"),
+  recaptchaToken: recaptchaTokenSchema,
 });
 
 export const verifyEmailSchema = z.object({
@@ -40,12 +45,12 @@ export const resendVerificationSchema = z.object({
 export const emailLoginSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(1, "Password is required"),
-  recaptchaToken: z.string().min(1, "reCAPTCHA token required"),
+  recaptchaToken: recaptchaTokenSchema,
 });
 
 export const phoneLoginSchema = z.object({
   phone: z.string().regex(/^\+9665\d{8}$/, "Invalid Saudi mobile number"),
-  recaptchaToken: z.string().min(1, "reCAPTCHA token required"),
+  recaptchaToken: recaptchaTokenSchema,
 });
 
 export const forgotPasswordSchema = z.object({
