@@ -59,6 +59,9 @@ export default function RegisterPage() {
         <div className="space-y-3">
           <button
             type="button"
+            onClick={() => {
+              window.location.href = `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api/v1"}/auth/google`;
+            }}
             className="flex w-full items-center justify-center gap-3 rounded-md border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
