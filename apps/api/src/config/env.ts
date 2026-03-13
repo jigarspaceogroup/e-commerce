@@ -50,6 +50,12 @@ const envSchema = z.object({
   // CORS
   CORS_ORIGIN_STOREFRONT: z.string().default("http://localhost:3000"),
   CORS_ORIGIN_ADMIN: z.string().default("http://localhost:3001"),
+
+  // MFA
+  MFA_ENCRYPTION_KEY: z.string().min(32).optional(),
+
+  // Admin IP allow-list (comma-separated, empty = disabled)
+  ADMIN_IP_ALLOWLIST: z.string().default(""),
 });
 
 function validateEnv() {

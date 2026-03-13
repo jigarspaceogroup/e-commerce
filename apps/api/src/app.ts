@@ -8,8 +8,7 @@ import { requestLogger } from "./middleware/logger.js";
 import { notFoundHandler, errorHandler } from "./middleware/error-handler.js";
 
 import { healthRouter } from "./routes/health.js";
-import { authRouter } from "./routes/auth.js";
-import { oauthRouter } from "./routes/oauth.js";
+import { v1Router } from "./routes/v1/index.js";
 import { docsRouter } from "./routes/docs.js";
 
 const app: Express = express();
@@ -43,8 +42,7 @@ app.use(cookieParser());
 
 // ── 7. Routes ────────────────────────────────────────────────────────────
 app.use("/api/v1", healthRouter);
-app.use("/api/v1", authRouter);
-app.use("/api/v1", oauthRouter);
+app.use("/api/v1", v1Router);
 
 // Swagger docs (disabled in production)
 if (process.env.NODE_ENV !== "production") {

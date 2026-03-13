@@ -5,7 +5,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --port 3000",
-    "lint": "next lint",
+    "lint": "eslint src/",
     "test": "echo 'No tests configured yet'",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next node_modules"
@@ -14,6 +14,7 @@
     "@repo/types": "workspace:*",
     "@repo/utils": "workspace:*",
     "@tailwindcss/postcss": "^4.2.1",
+    "@tanstack/react-query": "^5.90.21",
     "next": "^16.1.6",
     "next-intl": "^4.8.3",
     "postcss": "^8.5.8",
@@ -25,6 +26,8 @@
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^5.9.3"
+    "eslint": "^9.39.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.0"
   }
 }

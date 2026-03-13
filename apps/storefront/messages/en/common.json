@@ -46,5 +46,14 @@
     "customerService": "Customer Service",
     "faq": "FAQ",
     "returns": "Returns & Exchanges"
+  },
+  "nav": {
+    "categories": "Categories",
+    "searchPlaceholder": "Search products...",
+    "myOrders": "My Orders",
+    "myWishlist": "My Wishlist",
+    "myProfile": "My Profile",
+    "menu": "Menu",
+    "close": "Close"
   }
 }

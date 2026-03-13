@@ -3,6 +3,11 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { AuthProvider } from "@/lib/auth-context";
+import { ReactQueryProvider } from "@/lib/react-query";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -29,7 +34,14 @@ export default async function LocaleLayout({
     <html lang={locale} dir={dir}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AuthProvider>
+            <ReactQueryProvider>
+              <Header />
+              <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+              <Footer />
+              <MobileNav />
+            </ReactQueryProvider>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -46,5 +46,14 @@
     "customerService": "خدمة العملاء",
     "faq": "الأسئلة الشائعة",
     "returns": "الإرجاع والاستبدال"
+  },
+  "nav": {
+    "categories": "الفئات",
+    "searchPlaceholder": "ابحث عن المنتجات...",
+    "myOrders": "طلباتي",
+    "myWishlist": "قائمة الأمنيات",
+    "myProfile": "حسابي",
+    "menu": "القائمة",
+    "close": "إغلاق"
   }
 }
