@@ -5,7 +5,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --port 3001",
-    "lint": "next lint",
+    "lint": "eslint src/",
     "test": "echo 'No tests configured yet'",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next node_modules"
@@ -24,6 +24,8 @@
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^5.9.3"
+    "eslint": "^9.39.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.0"
   }
 }
