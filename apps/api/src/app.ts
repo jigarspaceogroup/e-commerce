@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -40,7 +41,10 @@ app.use(express.urlencoded({ extended: true }));
 // ── 6. Cookie parsing ────────────────────────────────────────────────────
 app.use(cookieParser());
 
-// ── 7. Routes ────────────────────────────────────────────────────────────
+// ── 7. Static file serving (uploaded images) ────────────────────────────
+app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
+
+// ── 8. Routes ────────────────────────────────────────────────────────────
 app.use("/api/v1", healthRouter);
 app.use("/api/v1", v1Router);
 
