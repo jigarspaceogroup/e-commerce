@@ -31,6 +31,8 @@ export function validate(schemas: ValidationSchemas) {
       const result = schemas.params.safeParse(req.params);
       if (!result.success) {
         errors.push(...formatZodError(result.error));
+      } else {
+        Object.assign(req.params, result.data);
       }
     }
 
@@ -38,6 +40,8 @@ export function validate(schemas: ValidationSchemas) {
       const result = schemas.query.safeParse(req.query);
       if (!result.success) {
         errors.push(...formatZodError(result.error));
+      } else {
+        (req as Record<string, unknown>).query = result.data;
       }
     }
 
