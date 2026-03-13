@@ -41,7 +41,7 @@ export function validate(schemas: ValidationSchemas) {
       if (!result.success) {
         errors.push(...formatZodError(result.error));
       } else {
-        (req as unknown as Record<string, unknown>).query = result.data;
+        Object.defineProperty(req, "query", { value: result.data, writable: true, configurable: true });
       }
     }
 
