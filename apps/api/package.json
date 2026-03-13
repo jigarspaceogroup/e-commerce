@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "lint": "echo 'No linter configured yet'",
     "test": "vitest run",
-    "type-check": "tsc --noEmit",
+    "type-check": "prisma generate && tsc --noEmit",
     "seed": "tsx prisma/seed.ts",
     "clean": "rm -rf dist node_modules"
   },

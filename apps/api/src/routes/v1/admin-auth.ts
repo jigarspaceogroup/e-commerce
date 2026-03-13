@@ -32,8 +32,12 @@ async function buildAdminTokenPayload(userId: string): Promise<TokenPayload> {
     },
   });
   const role = userRoles[0]?.role.name ?? "admin";
-  const permissions = userRoles.flatMap((ur) =>
-    ur.role.permissions.map((rp) => `${rp.permission.resource}:${rp.permission.action}`),
+  const permissions = userRoles.flatMap(
+    (ur: { role: { permissions: Array<{ permission: { resource: string; action: string } }> } }) =>
+      ur.role.permissions.map(
+        (rp: { permission: { resource: string; action: string } }) =>
+          `${rp.permission.resource}:${rp.permission.action}`,
+      ),
   );
   return { sub: userId, role, permissions };
 }
@@ -62,7 +66,7 @@ adminAuthRouter.post(
     if (!user || !user.passwordHash) throw unauthorized("Invalid credentials");
 
     // Verify admin role
-    const isAdmin = user.userRoles.some((ur) => ADMIN_ROLES.includes(ur.role.name));
+    const isAdmin = user.userRoles.some((ur: { role: { name: string } }) => ADMIN_ROLES.includes(ur.role.name));
     if (!isAdmin) throw unauthorized("Invalid credentials");
 
     // Check lockout
