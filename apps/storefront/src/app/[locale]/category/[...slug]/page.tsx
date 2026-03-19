@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { serverFetch } from "@/lib/api/server";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { serverFetch, serverFetchPaginated, parseDecimalFields } from "@/lib/api/server";
 import { redirect } from "next/navigation";
-import type { CategoryDetail } from "@/types/product";
+import { queryKeys } from "@/lib/query-keys";
+import type { CategoryDetail, ProductListItem } from "@/types/product";
 import { CategoryProductList } from "./category-product-list";
 
 interface PageProps {
@@ -41,13 +43,36 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     redirect(`/${locale}/products`);
   }
 
+  const queryClient = new QueryClient();
+
+  // Prefetch products for this category
+  try {
+    const categoryFilters = { categorySlug };
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: queryKeys.products.list(categoryFilters),
+      queryFn: async () => {
+        const result = await serverFetchPaginated<ProductListItem>("/products", { categorySlug });
+        return {
+          data: result.data.map((p) => parseDecimalFields(p, ["basePrice", "compareAtPrice"])),
+          hasMore: result.hasMore,
+          nextCursor: result.nextCursor,
+        };
+      },
+      initialPageParam: undefined as string | undefined,
+    });
+  } catch {
+    // Non-fatal
+  }
+
   return (
-    <CategoryProductList
-      category={category}
-      categorySlug={categorySlug}
-      locale={locale}
-      slugSegments={slug}
-      initialSearchParams={resolvedSearchParams}
-    />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <CategoryProductList
+        category={category}
+        categorySlug={categorySlug}
+        locale={locale}
+        slugSegments={slug}
+        initialSearchParams={resolvedSearchParams}
+      />
+    </HydrationBoundary>
   );
 }
