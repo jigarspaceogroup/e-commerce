@@ -1,0 +1,9 @@
+{
+  "category": {
+    "allCategories": "All Categories",
+    "shopByCategory": "Shop by Category",
+    "viewAll": "View All",
+    "productsCount": "{count} products",
+    "noCategories": "No categories available"
+  }
+}
