@@ -32,5 +32,8 @@ pnpm-debug.log*
 # Testing
 coverage/
 
+# Superpowers brainstorm mockups
+.superpowers/
+
 # Misc
 *.tsbuildinfo

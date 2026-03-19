@@ -1,4 +1,6 @@
 import { PrismaClient } from "../src/generated/prisma/client.js";
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv/config";
 import { seedRoles } from "./seed/roles.js";
 import { seedUsers } from "./seed/users.js";
 import { seedCategories } from "./seed/categories.js";
@@ -11,7 +13,9 @@ import { seedReviews } from "./seed/reviews.js";
 // Main seed runner
 // ---------------------------------------------------------------------------
 async function main(): Promise<void> {
-  const prisma = new PrismaClient();
+  const connectionString = process.env.DATABASE_URL ?? "";
+  const adapter = new PrismaPg({ connectionString });
+  const prisma = new PrismaClient({ adapter });
 
   try {
     console.log("=== Starting database seed ===\n");

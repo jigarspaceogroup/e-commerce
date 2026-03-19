@@ -29,6 +29,10 @@ export const CATEGORIES_READ = "categories:read" as const;
 export const CATEGORIES_UPDATE = "categories:update" as const;
 export const CATEGORIES_DELETE = "categories:delete" as const;
 
+// ---- Inventory ----
+export const INVENTORY_READ = "inventory:read" as const;
+export const INVENTORY_UPDATE = "inventory:update" as const;
+
 // ---- Content ----
 export const CONTENT_CREATE = "content:create" as const;
 export const CONTENT_READ = "content:read" as const;
@@ -89,6 +93,10 @@ export const ALL_PERMISSIONS: readonly string[] = [
   CATEGORIES_UPDATE,
   CATEGORIES_DELETE,
 
+  // inventory
+  INVENTORY_READ,
+  INVENTORY_UPDATE,
+
   // content
   CONTENT_CREATE,
   CONTENT_READ,
@@ -142,14 +150,14 @@ export const DEFAULT_ROLES: ReadonlyMap<string, readonly string[]> = new Map<
   // Full access — the wildcard is evaluated at runtime
   ["Super Admin", ["*"]],
 
-  // Product Manager: products:*, categories:*
+  // Product Manager: products:*, categories:*, inventory:*
   [
     "Product Manager",
-    [...permissionsForResource("products"), ...permissionsForResource("categories")],
+    [...permissionsForResource("products"), ...permissionsForResource("categories"), INVENTORY_READ, INVENTORY_UPDATE],
   ],
 
-  // Order Manager: orders:*, customers:read
-  ["Order Manager", [...permissionsForResource("orders"), CUSTOMERS_READ]],
+  // Order Manager: orders:*, customers:read, inventory:read
+  ["Order Manager", [...permissionsForResource("orders"), CUSTOMERS_READ, INVENTORY_READ]],
 
   // Content Manager: content:*, categories:read
   ["Content Manager", [...permissionsForResource("content"), CATEGORIES_READ]],

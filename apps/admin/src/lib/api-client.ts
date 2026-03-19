@@ -99,6 +99,31 @@ async function request<T>(opts: RequestOptions): Promise<{ success: boolean; dat
   return res.json();
 }
 
+export async function uploadFile<T>(
+  path: string,
+  file: File,
+  data?: Record<string, string>,
+): Promise<T> {
+  const formData = new FormData();
+  formData.append("image", file);
+  if (data) {
+    for (const [key, value] of Object.entries(data)) {
+      formData.append(key, value);
+    }
+  }
+  const headers: Record<string, string> = {};
+  const token = getAccessToken();
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  const res = await fetch(`${BASE_URL}${path}`, {
+    method: "POST",
+    headers,
+    credentials: "include",
+    body: formData,
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
 export const apiClient = {
   get<T>(path: string, params?: Record<string, string | number | boolean | undefined>) {
     return request<T>({ method: "GET", path, params });

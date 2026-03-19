@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
   },
   {
     label: "Products",
-    href: "/products",
+    href: "/dashboard/products",
     permission: "products:read",
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,8 +33,18 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    label: "Categories",
+    href: "/dashboard/categories",
+    permission: "products:read",
+    icon: (
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+      </svg>
+    ),
+  },
+  {
     label: "Orders",
-    href: "/orders",
+    href: "/dashboard/orders",
     permission: "orders:read",
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,8 +54,8 @@ const navItems: NavItem[] = [
   },
   {
     label: "Customers",
-    href: "/customers",
-    permission: "users:read",
+    href: "/dashboard/customers",
+    permission: "customers:read",
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -53,8 +63,18 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    label: "Inventory",
+    href: "/dashboard/inventory",
+    permission: "products:read",
+    icon: (
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+      </svg>
+    ),
+  },
+  {
     label: "Content",
-    href: "/content",
+    href: "/dashboard/content",
     permission: "content:read",
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +84,7 @@ const navItems: NavItem[] = [
   },
   {
     label: "Audit Logs",
-    href: "/audit-logs",
+    href: "/dashboard/audit-logs",
     permission: "audit_logs:read",
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +128,10 @@ export function Sidebar() {
       <nav className="flex-1 overflow-y-auto p-2">
         <ul className="space-y-1">
           {visibleItems.map((item) => {
-            const isActive = pathname.startsWith(item.href);
+            const isActive =
+              item.href === "/dashboard"
+                ? pathname === "/dashboard"
+                : pathname.startsWith(item.href);
             return (
               <li key={item.href}>
                 <Link
