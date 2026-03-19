@@ -1,24 +1,48 @@
 "use client";
 
-import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { LocaleSwitcher } from "../locale-switcher";
 import { UserMenu } from "./user-menu";
+import { MegaMenu } from "@/components/category/mega-menu";
+import { fetchCategoryTree } from "@/lib/api/categories";
+import { queryKeys } from "@/lib/query-keys";
 
 export function Header() {
   const t = useTranslations("common");
   const nav = useTranslations("nav");
+  const locale = useLocale();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const { data: categories } = useQuery({
+    queryKey: queryKeys.categories.tree(),
+    queryFn: fetchCategoryTree,
+    staleTime: 5 * 60 * 1000,
+  });
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
+    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white relative">
       {/* Top bar */}
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-gray-900">
           {t("appName")}
         </Link>
+
+        {/* Categories trigger - desktop only */}
+        <button
+          data-testid="categories-trigger"
+          type="button"
+          className="hidden md:flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900"
+          onClick={() => setMegaMenuOpen(!megaMenuOpen)}
+        >
+          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          {nav("categories")}
+        </button>
 
         {/* Search - hidden on mobile */}
         <div className="hidden flex-1 px-8 md:block">
@@ -88,6 +112,14 @@ export function Header() {
           </button>
         </div>
       </div>
+
+      {/* Mega Menu */}
+      <MegaMenu
+        categories={categories ?? []}
+        locale={locale}
+        isOpen={megaMenuOpen}
+        onClose={() => setMegaMenuOpen(false)}
+      />
 
       {/* Mobile search + menu */}
       {mobileMenuOpen && (
