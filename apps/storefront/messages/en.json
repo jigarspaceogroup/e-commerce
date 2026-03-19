@@ -77,5 +77,59 @@
     "terms": "Terms of Service",
     "shipping": "Shipping & Returns",
     "copyright": "\u00a9 2026 Store. All rights reserved."
+  },
+  "product": {
+    "allProducts": "All Products",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "notifyWhenAvailable": "Notify When Available",
+    "quantity": "Quantity",
+    "specifications": "Specifications",
+    "description": "Description",
+    "deliveryEstimate": "Estimated delivery: 3-5 business days",
+    "returnPolicy": "Free returns within 14 days",
+    "sar": "SAR",
+    "off": "{percent}% OFF",
+    "noProducts": "No products found",
+    "noProductsMessage": "Try adjusting your filters or browse our categories",
+    "showingCount": "Showing {count} products",
+    "loadMore": "Load More",
+    "loading": "Loading products...",
+    "selectVariant": "Select {attribute}",
+    "sku": "SKU: {sku}",
+    "inStock": "In Stock",
+    "lowStock": "Only {count} left",
+    "shareProduct": "Share",
+    "faq": "Frequently Asked Questions",
+    "showMore": "Show More",
+    "showLess": "Show Less"
+  },
+  "category": {
+    "allCategories": "All Categories",
+    "shopByCategory": "Shop by Category",
+    "viewAll": "View All",
+    "productsCount": "{count} products",
+    "noCategories": "No categories available"
+  },
+  "filter": {
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "clearAll": "Clear All",
+    "priceRange": "Price Range",
+    "priceMin": "Min",
+    "priceMax": "Max",
+    "brand": "Brand",
+    "availability": "Availability",
+    "inStockOnly": "In Stock Only",
+    "category": "Category",
+    "applyFilters": "Apply Filters",
+    "sortNewest": "Newest Arrivals",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "sortPopularity": "Popularity",
+    "resultsCount": "{count} results"
+  },
+  "breadcrumb": {
+    "home": "Home"
   }
 }

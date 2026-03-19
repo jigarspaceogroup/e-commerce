@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "clearAll": "Clear All",
+    "priceRange": "Price Range",
+    "priceMin": "Min",
+    "priceMax": "Max",
+    "brand": "Brand",
+    "availability": "Availability",
+    "inStockOnly": "In Stock Only",
+    "category": "Category",
+    "applyFilters": "Apply Filters",
+    "sortNewest": "Newest Arrivals",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "sortPopularity": "Popularity",
+    "resultsCount": "{count} results"
+  }
+}

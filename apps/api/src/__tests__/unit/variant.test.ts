@@ -1,5 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
+// Mock product-sync jobs
+vi.mock("../../jobs/product-sync.js", () => ({
+  enqueueProductIndex: vi.fn().mockResolvedValue(undefined),
+}));
+
 // Mock Prisma
 vi.mock("../../lib/prisma.js", () => ({
   prisma: {
@@ -191,7 +196,12 @@ describe("Variant Service", () => {
   // ─── atomicStockDecrement ──────────────────────────────────────────────────
   describe("atomicStockDecrement", () => {
     it("returns true when stock is sufficient", async () => {
+      vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce({
+        productId: "prod-1",
+        stockQuantity: 10,
+      } as any);
       vi.mocked(prisma.$executeRaw).mockResolvedValueOnce(1 as any);
+      vi.mocked(prisma.product.findUnique).mockResolvedValueOnce(null as any);
 
       const result = await atomicStockDecrement("var-1", 5);
 
@@ -199,6 +209,10 @@ describe("Variant Service", () => {
     });
 
     it("returns false when stock is insufficient", async () => {
+      vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce({
+        productId: "prod-1",
+        stockQuantity: 5,
+      } as any);
       vi.mocked(prisma.$executeRaw).mockResolvedValueOnce(0 as any);
 
       const result = await atomicStockDecrement("var-1", 100);
