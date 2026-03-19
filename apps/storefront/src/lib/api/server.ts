@@ -51,11 +51,11 @@ export function parseDecimalFields<T extends Record<string, unknown>>(
   obj: T,
   fields: string[],
 ): T {
-  const result = { ...obj };
+  const result = { ...obj } as Record<string, unknown>;
   for (const field of fields) {
     if (field in result && result[field] != null) {
-      result[field] = Number(result[field]) as T[keyof T];
+      result[field] = Number(result[field]);
     }
   }
-  return result;
+  return result as T;
 }

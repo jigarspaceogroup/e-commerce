@@ -38,7 +38,8 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
   const currentAttributes: Record<string, string> = selectedVariant?.attributes ?? {};
 
   // Handle attribute value click
-  const handleAttributeClick = (key: string, value: string) => {
+  const handleAttributeClick = (key: string, value: string | undefined) => {
+    if (!value) return;
     const newAttributes = { ...currentAttributes, [key]: value };
 
     // Find matching variant
@@ -115,7 +116,7 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
           {stockStatus && (
             <p className={`text-sm font-medium ${stockStatus.color}`}>{stockStatus.label}</p>
           )}
-          <p className="text-xs text-gray-500">{t("sku", { sku: selectedVariant.sku })}</p>
+          <p className="text-xs text-gray-500">{t("sku", { sku: selectedVariant.sku ?? "" })}</p>
         </div>
       )}
     </div>

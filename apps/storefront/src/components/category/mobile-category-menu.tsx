@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslations, useLocale } from "next-intl";
 import { fetchCategoryTree } from "@/lib/api/categories";
 import { queryKeys } from "@/lib/query-keys";
-import type { CategoryTreeNode } from "@/types/product";
 
 interface MobileCategoryMenuProps {
   isOpen: boolean;

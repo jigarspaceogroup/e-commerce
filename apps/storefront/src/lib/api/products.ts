@@ -6,12 +6,12 @@ import type {
 } from "@/types/product";
 
 function parseProductPrices<T extends Record<string, unknown>>(product: T): T {
-  const result = { ...product };
-  if ("basePrice" in result) result.basePrice = Number(result.basePrice) as T[keyof T];
+  const result = { ...product } as Record<string, unknown>;
+  if ("basePrice" in result) result.basePrice = Number(result.basePrice);
   if ("compareAtPrice" in result && result.compareAtPrice != null) {
-    result.compareAtPrice = Number(result.compareAtPrice) as T[keyof T];
+    result.compareAtPrice = Number(result.compareAtPrice);
   }
-  return result;
+  return result as T;
 }
 
 export async function fetchProducts(
@@ -32,7 +32,7 @@ export async function fetchProducts(
   if (!res.success) throw new Error(res.error?.message ?? "Failed to fetch products");
 
   return {
-    data: res.data.map(parseProductPrices),
+    data: res.data.map((p) => parseProductPrices(p as unknown as Record<string, unknown>) as unknown as ProductListItem),
     hasMore: res.meta?.pagination?.hasMore ?? false,
     nextCursor: res.meta?.pagination?.cursor,
   };
@@ -44,7 +44,7 @@ export async function fetchProductBySlug(
   const res = await apiClient.get<ProductDetail | { redirect: string }>(`/products/${slug}`);
   if (!res.success) throw new Error(res.error?.message ?? "Product not found");
   if ("redirect" in res.data) return res.data;
-  return parseProductPrices(res.data);
+  return parseProductPrices(res.data as unknown as Record<string, unknown>) as unknown as ProductDetail;
 }
 
 export function parseFiltersFromParams(

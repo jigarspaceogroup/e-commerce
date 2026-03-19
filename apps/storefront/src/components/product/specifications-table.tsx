@@ -8,7 +8,7 @@ interface SpecificationsTableProps {
   locale: string;
 }
 
-export default function SpecificationsTable({
+export function SpecificationsTable({
   specifications,
   locale,
 }: SpecificationsTableProps) {
@@ -54,3 +54,5 @@ export default function SpecificationsTable({
     </div>
   );
 }
+
+export default SpecificationsTable;

@@ -62,6 +62,7 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
   // Product name (last item, no link)
   breadcrumbItems.push({
     label: locale === "ar" ? product.titleAr : product.titleEn,
+    href: "",
   });
 
   const title = locale === "ar" ? product.titleAr : product.titleEn;

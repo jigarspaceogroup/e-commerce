@@ -14,8 +14,8 @@ interface ProductCardProps {
 export function ProductCard({ product, locale }: ProductCardProps) {
   const t = useTranslations("product");
 
-  const isOutOfStock = product.variants.every((v) => v.stockQuantity <= 0);
-  const hasImages = product.images.length > 0;
+  const isOutOfStock = product.variants?.every((v) => v.stockQuantity <= 0);
+  const hasImages = product.images?.length > 0;
 
   return (
     <Link
@@ -25,7 +25,7 @@ export function ProductCard({ product, locale }: ProductCardProps) {
     >
       {/* Image section */}
       <div className="relative aspect-square bg-gray-100 overflow-hidden">
-        {hasImages ? (
+        {hasImages && product.images?.[0] ? (
           <Image
             src={product.images[0].url}
             alt={product.images[0].altTextEn ?? product.titleEn}

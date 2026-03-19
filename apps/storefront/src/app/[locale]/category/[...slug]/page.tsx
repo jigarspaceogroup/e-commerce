@@ -35,8 +35,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   let category: CategoryDetail;
   try {
     const result = await serverFetch<CategoryDetail | { redirect: string }>(`/categories/${categorySlug}`);
-    if (result && "redirect" in result) {
-      redirect(`/${locale}/category/${(result as { redirect: string }).redirect}`);
+    if (result && "redirect" in result && typeof result.redirect === "string") {
+      redirect(`/${locale}/category/${result.redirect}`);
     }
     category = result as CategoryDetail;
   } catch {
@@ -51,9 +51,9 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     await queryClient.prefetchInfiniteQuery({
       queryKey: queryKeys.products.list(categoryFilters),
       queryFn: async () => {
-        const result = await serverFetchPaginated<ProductListItem>("/products", { categorySlug });
+        const result = await serverFetchPaginated<ProductListItem>("/products", { categorySlug: categorySlug ?? "" });
         return {
-          data: result.data.map((p) => parseDecimalFields(p, ["basePrice", "compareAtPrice"])),
+          data: result.data.map((p) => parseDecimalFields(p as unknown as Record<string, unknown>, ["basePrice", "compareAtPrice"]) as unknown as ProductListItem),
           hasMore: result.hasMore,
           nextCursor: result.nextCursor,
         };
@@ -68,7 +68,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     <HydrationBoundary state={dehydrate(queryClient)}>
       <CategoryProductList
         category={category}
-        categorySlug={categorySlug}
+        categorySlug={categorySlug ?? ""}
         locale={locale}
         slugSegments={slug}
         initialSearchParams={resolvedSearchParams}

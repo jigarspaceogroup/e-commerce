@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { serverFetch, parseDecimalFields } from "@/lib/api/server";
 import { redirect } from "next/navigation";
-import { formatPrice } from "@/lib/format";
 import type { ProductDetail } from "@/types/product";
 import { ProductDetailView } from "./product-detail-view";
 
@@ -39,14 +38,14 @@ export default async function ProductPage({ params }: PageProps) {
   let product: ProductDetail;
   try {
     const result = await serverFetch<ProductDetail | { redirect: string }>(`/products/${slug}`);
-    if (result && "redirect" in result) {
-      redirect(`/${locale}/products/${(result as { redirect: string }).redirect}`);
+    if (result && "redirect" in result && typeof result.redirect === "string") {
+      redirect(`/${locale}/products/${result.redirect}`);
     }
-    product = parseDecimalFields(result as ProductDetail, ["basePrice", "compareAtPrice"]);
+    product = parseDecimalFields(result as unknown as Record<string, unknown>, ["basePrice", "compareAtPrice"]) as unknown as ProductDetail;
     // Also parse variant priceOverrides
     product.variants = product.variants.map((v) =>
-      parseDecimalFields(v, ["priceOverride", "weightOverride"]),
-    );
+      parseDecimalFields(v as unknown as Record<string, unknown>, ["priceOverride", "weightOverride"])
+    ) as unknown as ProductDetail["variants"];
   } catch {
     redirect(`/${locale}/products`);
   }

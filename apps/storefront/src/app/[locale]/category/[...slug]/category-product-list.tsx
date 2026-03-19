@@ -25,7 +25,6 @@ export function CategoryProductList({
   categorySlug,
   locale,
   slugSegments,
-  initialSearchParams,
 }: CategoryProductListProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -69,6 +68,7 @@ export function CategoryProductList({
   for (let i = 0; i < slugSegments.length - 1; i++) {
     // Try to find the category name from the tree
     const segmentSlug = slugSegments[i];
+    if (!segmentSlug) continue;
     let segmentName = segmentSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
     // Search tree for matching slug
@@ -86,7 +86,7 @@ export function CategoryProductList({
   }
 
   // Last segment = current category (no link)
-  breadcrumbItems.push({ label: categoryName });
+  breadcrumbItems.push({ label: categoryName, href: "" });
 
   const updateFilters = (newFilters: ProductFiltersType) => {
     const urlParams = new URLSearchParams();

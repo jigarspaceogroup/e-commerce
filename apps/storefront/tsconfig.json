@@ -13,5 +13,5 @@
     "plugins": [{ "name": "next" }]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "next-env.d.ts", "*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/__tests__/**/*", "**/*.test.ts", "**/*.test.tsx"]
 }

@@ -31,7 +31,7 @@ export default async function ProductsPage({ searchParams }: PageProps) {
 
         const result = await serverFetchPaginated<ProductListItem>("/products", filterParams);
         return {
-          data: result.data.map((p) => parseDecimalFields(p, ["basePrice", "compareAtPrice"])),
+          data: result.data.map((p) => parseDecimalFields(p as unknown as Record<string, unknown>, ["basePrice", "compareAtPrice"]) as unknown as ProductListItem),
           hasMore: result.hasMore,
           nextCursor: result.nextCursor,
         };
