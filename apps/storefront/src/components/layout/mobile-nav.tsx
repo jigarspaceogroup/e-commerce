@@ -1,13 +1,16 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
+import { MobileCategoryMenu } from "@/components/category/mobile-category-menu";
 
 export function MobileNav() {
   const t = useTranslations("common");
   const nav = useTranslations("nav");
   const pathname = usePathname();
+  const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
 
   const items = [
     {
@@ -57,6 +60,23 @@ export function MobileNav() {
           const pathWithoutLocale = "/" + pathSegments.slice(1).join("/");
           const isActive = item.href === "/" ? pathWithoutLocale === "/" : pathWithoutLocale.startsWith(item.href);
 
+          // Categories opens menu instead of navigating
+          if (item.href === "/categories") {
+            return (
+              <button
+                key={item.href}
+                type="button"
+                onClick={() => setCategoryMenuOpen(true)}
+                className={`flex flex-col items-center gap-1 px-3 py-2 text-xs ${
+                  categoryMenuOpen ? "text-blue-600" : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                {item.icon}
+                <span>{item.label}</span>
+              </button>
+            );
+          }
+
           return (
             <Link
               key={item.href}
@@ -71,6 +91,7 @@ export function MobileNav() {
           );
         })}
       </div>
+      <MobileCategoryMenu isOpen={categoryMenuOpen} onClose={() => setCategoryMenuOpen(false)} />
     </nav>
   );
 }
