@@ -6,6 +6,9 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      { protocol: "http", hostname: "localhost", port: "4000", pathname: "/uploads/**" },
+    ],
   },
   async headers() {
     return [
