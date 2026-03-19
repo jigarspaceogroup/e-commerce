@@ -9,6 +9,7 @@
     "test": "vitest run",
     "type-check": "prisma generate && tsc --noEmit",
     "seed": "tsx prisma/seed.ts",
+    "reindex": "tsx src/scripts/reindex-products.ts",
     "clean": "rm -rf dist node_modules"
   },
   "dependencies": {

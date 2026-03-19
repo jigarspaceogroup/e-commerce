@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 import { notFound, badRequest } from "../middleware/error-handler.js";
+import { enqueueProductIndex } from "../jobs/product-sync.js";
 import type { Prisma } from "../generated/prisma/client.js";
 
 export async function listInventory(filters: {
@@ -96,7 +97,42 @@ export async function updateStock(
     }),
   ]);
 
+  // Re-index product to update inStock flag in Meilisearch
+  await syncProductAfterStockChange(variant.productId);
+
   return updated;
+}
+
+async function syncProductAfterStockChange(productId: string): Promise<void> {
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id: productId, status: "published", deletedAt: null },
+      include: {
+        variants: { select: { sku: true, stockQuantity: true } },
+      },
+    });
+
+    if (!product) return; // Not published or deleted, no need to sync
+
+    await enqueueProductIndex({
+      id: product.id,
+      titleEn: product.titleEn,
+      titleAr: product.titleAr,
+      descriptionEn: (product.descriptionEn ?? "").slice(0, 500),
+      descriptionAr: (product.descriptionAr ?? "").slice(0, 500),
+      slug: product.slug,
+      basePrice: Number(product.basePrice),
+      brand: product.brand || "",
+      categoryId: product.categoryId,
+      status: product.status,
+      sku: product.variants[0]?.sku || "",
+      averageRating: 0,
+      inStock: product.variants.some((v) => v.stockQuantity > 0),
+      createdAt: product.createdAt.toISOString(),
+    });
+  } catch (err) {
+    console.error("Failed to sync product after stock change:", err);
+  }
 }
 
 export async function getInventorySummary() {
