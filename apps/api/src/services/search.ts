@@ -39,14 +39,12 @@ export async function initProductIndex(): Promise<Index> {
     "brand",
     "status",
     "basePrice",
-    "averageRating",
     "inStock",
   ]);
 
   await index.updateSortableAttributes([
     "basePrice",
     "createdAt",
-    "averageRating",
   ]);
 
   await index.updateSearchableAttributes([
@@ -56,6 +54,17 @@ export async function initProductIndex(): Promise<Index> {
     "descriptionEn",
     "brand",
     "sku",
+  ]);
+
+  await index.updateLocalizedAttributes([
+    { attributePatterns: ["titleAr", "descriptionAr"], locales: ["ara"] },
+    { attributePatterns: ["titleEn", "descriptionEn"], locales: ["eng"] },
+  ]);
+
+  await index.updateStopWords([
+    "من", "في", "على", "إلى", "عن", "مع", "هذا", "هذه",
+    "ذلك", "تلك", "التي", "الذي", "هو", "هي", "كان",
+    "كانت", "ليس", "لا", "ما", "أن", "إن", "قد", "و",
   ]);
 
   return index;
@@ -72,7 +81,6 @@ export interface ProductSearchDocument {
   slug: string;
   status: string;
   categoryId: string;
-  averageRating: number;
   inStock: boolean;
   sku: string;
   createdAt: string;

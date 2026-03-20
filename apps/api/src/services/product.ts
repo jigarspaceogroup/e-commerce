@@ -247,7 +247,6 @@ async function syncProductToSearch(product: Record<string, unknown>): Promise<vo
       categoryId: product.categoryId as string,
       status: product.status as string,
       sku: (firstVariant?.sku as string) || "",
-      averageRating: 0,
       inStock: variants ? variants.some((v) => (v.stockQuantity as number) > 0) : false,
       createdAt: (product.createdAt as Date).toISOString(),
     });
