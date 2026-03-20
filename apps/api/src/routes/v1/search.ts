@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { z } from "zod";
-import { searchProductsAPI } from "../../services/search-api.js";
+import { searchProductsAPI, searchSuggestions } from "../../services/search-api.js";
 
 export const searchRouter: IRouter = Router();
 
@@ -32,6 +32,20 @@ searchRouter.get("/", async (req, res, next) => {
       limit: params.limit,
       offset: params.offset,
     });
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+const suggestSchema = z.object({
+  q: z.string().min(2),
+});
+
+searchRouter.get("/suggest", async (req, res, next) => {
+  try {
+    const { q } = suggestSchema.parse(req.query);
+    const result = await searchSuggestions(q);
     res.json(result);
   } catch (err) {
     next(err);

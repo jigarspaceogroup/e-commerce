@@ -153,3 +153,65 @@ export async function searchProductsAPI(params: SearchParams) {
 
   return response;
 }
+
+export async function searchSuggestions(q: string) {
+  const client = getSearchClient();
+  const index = client.index(PRODUCT_INDEX);
+
+  // Products from Meilisearch
+  const productResults = await index.search(q, {
+    limit: 4,
+    attributesToRetrieve: ["id", "titleEn", "titleAr", "slug"],
+  });
+  const productSuggestions = productResults.hits.map((h: any) => ({
+    type: "product" as const,
+    textEn: h.titleEn,
+    textAr: h.titleAr,
+    url: `/products/${h.slug}`,
+  }));
+
+  // Categories from Prisma
+  const categories = await prisma.category.findMany({
+    where: {
+      OR: [
+        { nameEn: { contains: q, mode: "insensitive" } },
+        { nameAr: { contains: q, mode: "insensitive" } },
+      ],
+    },
+    take: 2,
+    select: { nameEn: true, nameAr: true, slug: true },
+  });
+  const categorySuggestions = categories.map((c) => ({
+    type: "category" as const,
+    textEn: c.nameEn,
+    textAr: c.nameAr,
+    url: `/category/${c.slug}`,
+  }));
+
+  // Brands from Prisma
+  const brandResults = await prisma.product.findMany({
+    where: {
+      brand: { contains: q, mode: "insensitive" },
+      status: "published",
+      deletedAt: null,
+    },
+    distinct: ["brand"],
+    take: 2,
+    select: { brand: true },
+  });
+  const brandSuggestions = brandResults
+    .filter((b) => b.brand)
+    .map((b) => ({
+      type: "brand" as const,
+      textEn: b.brand!,
+      textAr: b.brand!,
+      url: `/search?q=${encodeURIComponent(b.brand!)}&brand=${encodeURIComponent(b.brand!)}`,
+    }));
+
+  return {
+    success: true,
+    data: {
+      suggestions: [...productSuggestions, ...categorySuggestions, ...brandSuggestions].slice(0, 8),
+    },
+  };
+}
