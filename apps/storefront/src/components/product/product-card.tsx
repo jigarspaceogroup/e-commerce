@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { PriceDisplay } from "@/components/shared/price-display";
+import { RatingStars } from "@/components/ui/rating-stars";
 import type { ProductListItem } from "@/types/product";
 
 interface ProductCardProps {
@@ -20,21 +21,21 @@ export function ProductCard({ product, locale }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group block"
+      className="group transition-transform duration-200 hover:-translate-y-0.5 block"
       data-testid="product-card"
     >
       {/* Image section */}
-      <div className="relative aspect-square bg-gray-100 overflow-hidden">
+      <div className="relative aspect-square bg-surface-warm rounded-lg overflow-hidden">
         {hasImages && product.images?.[0] ? (
           <Image
             src={product.images[0].url}
             alt={product.images[0].altTextEn ?? product.titleEn}
             fill
             sizes="(max-width: 768px) 50vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover"
           />
         ) : (
-          <div className="flex flex-col items-center justify-center h-full text-gray-400">
+          <div className="flex flex-col items-center justify-center h-full text-primary-subtle">
             <svg
               className="w-12 h-12 mb-2"
               fill="none"
@@ -55,20 +56,20 @@ export function ProductCard({ product, locale }: ProductCardProps) {
 
         {/* Out of stock overlay */}
         {isOutOfStock && (
-          <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-xs text-center py-1">
+          <div className="absolute bottom-0 inset-x-0 bg-primary/60 text-white text-xs text-center py-1">
             {t("outOfStock")}
           </div>
         )}
       </div>
 
       {/* Info section */}
-      <div className="p-3">
-        <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+      <div className="mt-4 space-y-2">
+        <h3 className="text-primary text-body-lg font-bold truncate">
           {locale === "ar" ? product.titleAr : product.titleEn}
         </h3>
-        <p className="text-xs text-gray-500 mb-2">
-          {locale === "ar" ? product.category.nameAr : product.category.nameEn}
-        </p>
+        {product.averageRating !== null && product.averageRating !== undefined && (
+          <RatingStars rating={product.averageRating ?? 0} size={16} showValue />
+        )}
         <PriceDisplay
           basePrice={product.basePrice}
           compareAtPrice={product.compareAtPrice}
