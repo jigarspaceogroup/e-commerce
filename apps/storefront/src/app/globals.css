@@ -33,8 +33,8 @@
 
   /* ===== TYPOGRAPHY ===== */
 
-  --font-heading: var(--font-clash), "IBM Plex Sans Arabic", sans-serif;
-  --font-body: var(--font-satoshi), "IBM Plex Sans Arabic", sans-serif;
+  --font-heading: sans-serif;
+  --font-body: sans-serif;
   --font-arabic: "IBM Plex Sans Arabic", sans-serif;
 
   /* Display sizes */
@@ -73,6 +73,12 @@
   --radius-lg: 20px;
   --radius-xl: 40px;
   --radius-pill: 62px;
+}
+
+/* Override font theme tokens on body where Next.js font variables are available */
+body {
+  --font-body: var(--font-satoshi), "IBM Plex Sans Arabic", sans-serif;
+  --font-heading: var(--font-clash), "IBM Plex Sans Arabic", sans-serif;
 }
 
 /* RTL-specific overrides */

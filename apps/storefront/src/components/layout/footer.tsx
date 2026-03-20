@@ -9,7 +9,7 @@ export function Footer() {
   const common = useTranslations("common");
 
   return (
-    <footer className="bg-surface">
+    <footer className="bg-surface-muted pt-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Newsletter Section */}
         <div className="bg-primary rounded-lg p-9 lg:p-16 lg:flex lg:items-center lg:justify-between">
