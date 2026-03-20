@@ -1,38 +1,103 @@
 @import "tailwindcss";
 
-/* Design Tokens */
 @theme {
-  /* Brand Colors */
-  --color-brand-primary-50: #f0f7ff;
-  --color-brand-primary-100: #e0effe;
-  --color-brand-primary-200: #b9dffd;
-  --color-brand-primary-300: #7cc5fc;
-  --color-brand-primary-400: #36a9f8;
-  --color-brand-primary-500: #0c8ee9;
-  --color-brand-primary-600: #0070c7;
-  --color-brand-primary-700: #0059a1;
-  --color-brand-primary-800: #054c85;
-  --color-brand-primary-900: #04406e;
+  /* ===== COLORS ===== */
 
-  --color-brand-secondary-500: #8b5cf6;
-  --color-brand-secondary-600: #7c3aed;
-  --color-brand-secondary-700: #6d28d9;
+  /* Primary (black-dominant) */
+  --color-primary: #000000;
+  --color-primary-muted: rgba(0, 0, 0, 0.6);
+  --color-primary-subtle: rgba(0, 0, 0, 0.4);
+  --color-primary-faint: rgba(0, 0, 0, 0.2);
 
-  --color-brand-accent-500: #f97316;
-  --color-brand-accent-600: #ea580c;
+  /* Borders */
+  --color-border: rgba(0, 0, 0, 0.1);
 
-  /* Semantic Colors */
-  --color-success: #16a34a;
-  --color-warning: #eab308;
-  --color-error: #dc2626;
-  --color-info: #0284c7;
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0f0f0;
+  --color-surface-warm: #f0eeed;
+  --color-surface-alt: #f2f0f1;
 
-  /* Typography */
-  --font-sans: "Inter", "IBM Plex Sans Arabic", sans-serif;
+  /* On-primary (text on dark backgrounds) */
+  --color-on-primary: #ffffff;
+
+  /* Accent */
+  --color-accent-red: #ff3333;
+  --color-accent-red-bg: rgba(255, 51, 51, 0.1);
+
+  /* Semantic */
+  --color-rating: #ffc633;
+  --color-success: #00c12b;
+  --color-warning: #f59e0b;
+  --color-error: #ff3333;
+
+  /* ===== TYPOGRAPHY ===== */
+
+  --font-heading: sans-serif;
+  --font-body: sans-serif;
   --font-arabic: "IBM Plex Sans Arabic", sans-serif;
+
+  /* Display sizes */
+  --text-display-xl: 4rem;
+  --text-display-xl--line-height: 1;
+  --text-display-lg: 3rem;
+  --text-display-lg--line-height: 1.2;
+  --text-display-md: 2.5rem;
+  --text-display-md--line-height: 1.125;
+  --text-display-sm: 2.25rem;
+  --text-display-sm--line-height: 1.1;
+  --text-heading-lg: 2rem;
+  --text-heading-lg--line-height: 1.2;
+  --text-heading-md: 1.5rem;
+  --text-heading-md--line-height: 1.17;
+
+  /* Body sizes */
+  --text-body-xl: 1.5rem;
+  --text-body-xl--line-height: 1.35;
+  --text-body-lg: 1.25rem;
+  --text-body-lg--line-height: 1.35;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.375;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-body-xs: 0.75rem;
+  --text-body-xs--line-height: 1.5;
+  --text-body-xxs: 0.625rem;
+  --text-body-xxs--line-height: 1.4;
+
+  /* ===== BORDER RADIUS ===== */
+
+  --radius-none: 0px;
+  --radius-sm: 8px;
+  --radius-md: 13px;
+  --radius-lg: 20px;
+  --radius-xl: 40px;
+  --radius-pill: 62px;
 }
 
-/* RTL-specific overrides using logical properties */
+/* Override font theme tokens on body where Next.js font variables are available */
+body {
+  --font-body: var(--font-satoshi), "IBM Plex Sans Arabic", sans-serif;
+  --font-heading: var(--font-clash), "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* RTL-specific overrides */
 [dir="rtl"] {
   font-family: var(--font-arabic);
 }
+
+/* Shimmer animation for loading skeletons */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Hide scrollbar for testimonials carousel */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }

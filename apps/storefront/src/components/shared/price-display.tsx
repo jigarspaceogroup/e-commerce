@@ -19,15 +19,15 @@ export function PriceDisplay({ basePrice, compareAtPrice, locale }: PriceDisplay
 
   return (
     <div className="flex items-center gap-2 flex-wrap" data-testid="price-display">
-      <span className="text-lg font-bold text-gray-900">
+      <span className="text-lg font-bold text-primary">
         {formatPrice(basePrice, locale)}
       </span>
       {hasDiscount && (
         <>
-          <span className="text-sm text-gray-500 line-through">
+          <span className="text-sm text-primary-subtle line-through">
             {formatPrice(compareAtPrice, locale)}
           </span>
-          <span className="text-xs font-semibold text-red-600 bg-red-50 px-1.5 py-0.5 rounded">
+          <span className="bg-accent-red-bg text-accent-red text-body-xs font-medium rounded-pill py-1.5 px-3.5">
             {t("off", { percent: discount })}
           </span>
         </>

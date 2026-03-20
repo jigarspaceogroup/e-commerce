@@ -21,9 +21,9 @@ function getStrength(password: string): { score: number; label: string } {
 }
 
 const strengthColors: Record<string, string> = {
-  weak: "bg-red-500",
-  medium: "bg-yellow-500",
-  strong: "bg-green-500",
+  weak: "bg-accent-red",
+  medium: "bg-warning",
+  strong: "bg-success",
 };
 
 const strengthLabels: Record<string, Record<string, string>> = {
@@ -46,17 +46,17 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
           <div
             key={i}
             className={`h-1.5 flex-1 rounded-full ${
-              i <= score ? strengthColors[label] : "bg-gray-200"
+              i <= score ? strengthColors[label] : "bg-surface-muted"
             }`}
           />
         ))}
       </div>
       <p
-        className={`mt-1 text-xs ${label === "weak" ? "text-red-600" : label === "medium" ? "text-yellow-600" : "text-green-600"}`}
+        className={`mt-1 text-xs ${label === "weak" ? "text-accent-red" : label === "medium" ? "text-warning" : "text-success"}`}
       >
         {strengthLabels[label]?.[locale] ?? label}
       </p>
-      <p className="mt-1 text-xs text-gray-500">
+      <p className="mt-1 text-xs text-primary-subtle">
         {t("register.passwordRequirements")}
       </p>
     </div>

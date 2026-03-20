@@ -9,21 +9,25 @@ interface QuantitySelectorProps {
 
 export function QuantitySelector({ value, onChange, max, min = 1 }: QuantitySelectorProps) {
   return (
-    <div data-testid="quantity-selector" className="flex items-center gap-2">
+    <div className="inline-flex items-center gap-5 rounded-pill bg-surface-muted px-5 py-3">
       <button
-        className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+        type="button"
+        onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        onClick={() => onChange(value - 1)}
-        type="button"
+        className="text-body-lg text-primary disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="Decrease quantity"
       >
-        -
+        −
       </button>
-      <span className="w-10 text-center text-sm font-medium">{value}</span>
+      <span className="min-w-[2ch] text-center text-body-md font-medium text-primary">
+        {value}
+      </span>
       <button
-        className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-        disabled={value >= max}
-        onClick={() => onChange(value + 1)}
         type="button"
+        onClick={() => onChange(Math.min(max, value + 1))}
+        disabled={value >= max}
+        className="text-body-lg text-primary disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="Increase quantity"
       >
         +
       </button>

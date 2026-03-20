@@ -8,6 +8,7 @@ const modules = [
   "category",
   "filter",
   "breadcrumb",
+  "home",
   "cart",
   "checkout",
   "order",

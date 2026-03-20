@@ -1,0 +1,17 @@
+{
+  "home": {
+    "hero": {
+      "title": "FIND CLOTHES THAT MATCHES YOUR STYLE",
+      "subtitle": "Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.",
+      "cta": "Shop Now",
+      "statBrands": "International Brands",
+      "statProducts": "High-Quality Products",
+      "statCustomers": "Happy Customers"
+    },
+    "newArrivals": "NEW ARRIVALS",
+    "topSelling": "TOP SELLING",
+    "browseByStyle": "BROWSE BY DRESS STYLE",
+    "happyCustomers": "OUR HAPPY CUSTOMERS",
+    "viewAll": "View All"
+  }
+}

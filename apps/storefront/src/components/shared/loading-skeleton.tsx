@@ -3,12 +3,12 @@ interface SkeletonProps {
 }
 
 export function Skeleton({ className }: SkeletonProps) {
-  return <div className={`animate-pulse bg-gray-200 rounded ${className ?? ""}`} />;
+  return <div className={`animate-shimmer bg-surface-muted rounded ${className ?? ""}`} />;
 }
 
 export function SkeletonCard() {
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden p-4">
+    <div className="border border-border rounded-lg overflow-hidden p-4">
       <Skeleton className="w-full aspect-square rounded-lg mb-3" />
       <Skeleton className="h-4 w-3/4 mb-2" />
       <Skeleton className="h-4 w-1/2 mb-2" />

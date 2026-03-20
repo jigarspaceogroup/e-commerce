@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { apiClient } from "@/lib/api-client";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function ForgotPasswordPage() {
   const t = useTranslations("auth");
@@ -27,58 +29,57 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        <h1 className="mb-4 text-center text-2xl font-bold text-gray-900">
+    <div className="bg-surface-alt min-h-screen flex items-center justify-center py-12 px-4">
+      <div className="bg-surface rounded-lg p-10 max-w-[480px] w-full">
+        <h1 className="mb-4 text-center text-2xl font-bold text-primary">
           {t("passwordReset.resetPassword")}
         </h1>
 
         {submitted ? (
           <div className="space-y-4">
-            <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center">
-              <svg className="mx-auto mb-3 h-12 w-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-success/10 text-success border border-success/20 rounded-lg p-4 text-center">
+              <svg className="mx-auto mb-3 h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <p className="text-sm text-green-700">
+              <p className="text-body-sm">
                 {t("passwordReset.resetLinkSent", { email })}
               </p>
             </div>
             <div className="text-center">
-              <Link href="/login" className="text-sm font-medium text-blue-600 hover:text-blue-700">
+              <Link href="/login" className="text-body-sm text-primary underline">
                 {t("passwordReset.backToLogin")}
               </Link>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-body-sm text-primary-muted">
               {t("passwordReset.enterEmail")}
             </p>
 
             <div>
-              <label htmlFor="forgot-email" className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="forgot-email" className="mb-1 block text-body-sm font-medium text-primary-muted">
                 {t("login.emailLabel")}
               </label>
-              <input
+              <Input
                 id="forgot-email"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
 
-            <button
+            <Button
               type="submit"
               disabled={loading}
-              className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              size="full"
             >
               {loading ? common("loading") : t("passwordReset.sendResetLink")}
-            </button>
+            </Button>
 
             <div className="text-center">
-              <Link href="/login" className="text-sm font-medium text-blue-600 hover:text-blue-700">
+              <Link href="/login" className="text-body-sm text-primary underline">
                 {t("passwordReset.backToLogin")}
               </Link>
             </div>

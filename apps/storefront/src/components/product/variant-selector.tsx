@@ -59,12 +59,12 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
   // Stock status
   const getStockStatus = (variant: ProductDetailVariant) => {
     if (variant.stockQuantity <= 0) {
-      return { label: t("outOfStock"), color: "text-red-600" };
+      return { label: t("outOfStock"), color: "text-accent-red" };
     }
     if (variant.lowStockThreshold && variant.stockQuantity <= variant.lowStockThreshold) {
-      return { label: t("lowStock", { count: variant.stockQuantity }), color: "text-amber-600" };
+      return { label: t("lowStock", { count: variant.stockQuantity }), color: "text-warning" };
     }
-    return { label: t("inStock"), color: "text-green-600" };
+    return { label: t("inStock"), color: "text-success" };
   };
 
   const effectivePrice = selectedVariant?.priceOverride ?? basePrice;
@@ -74,7 +74,7 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
     <div data-testid="variant-selector" className="space-y-4">
       {attributeOptions.map(({ key, values }) => (
         <div key={key}>
-          <h3 className="text-sm font-medium text-gray-900 mb-2">
+          <h3 className="text-body-md text-primary-muted mb-2">
             {t("selectVariant", { attribute: key })}
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -92,12 +92,12 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
                   onClick={() => handleAttributeClick(key, value)}
                   disabled={!hasStock}
                   className={`
-                    px-4 py-2 rounded-lg text-sm border transition-colors min-w-[44px] min-h-[44px]
+                    rounded-pill py-3 px-6 text-body-md transition-colors min-w-[44px] min-h-[44px]
                     ${isSelected
-                      ? "border-blue-600 bg-blue-50 text-blue-700 font-medium"
+                      ? "bg-primary text-on-primary font-medium"
                       : hasStock
-                        ? "border-gray-300 text-gray-700 hover:border-gray-400"
-                        : "border-gray-200 text-gray-400 line-through cursor-not-allowed"
+                        ? "bg-surface-muted text-primary-muted hover:bg-surface-muted/80"
+                        : "bg-surface-muted text-primary-subtle line-through cursor-not-allowed opacity-50"
                     }
                   `}
                 >
@@ -114,9 +114,9 @@ export function VariantSelector({ variants, basePrice, selectedVariantId, onSele
         <div className="pt-2 space-y-2">
           <PriceDisplay basePrice={effectivePrice} locale={locale} />
           {stockStatus && (
-            <p className={`text-sm font-medium ${stockStatus.color}`}>{stockStatus.label}</p>
+            <p className={`text-body-sm font-medium ${stockStatus.color}`}>{stockStatus.label}</p>
           )}
-          <p className="text-xs text-gray-500">{t("sku", { sku: selectedVariant.sku ?? "" })}</p>
+          <p className="text-body-xs text-primary-subtle">{t("sku", { sku: selectedVariant.sku ?? "" })}</p>
         </div>
       )}
     </div>

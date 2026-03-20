@@ -54,17 +54,17 @@ export function MegaMenu({ categories, locale, isOpen, onClose }: MegaMenuProps)
     <div
       ref={containerRef}
       data-testid="mega-menu"
-      className="absolute inset-x-0 top-full bg-white border-b border-gray-200 shadow-lg z-50"
+      className="absolute inset-x-0 top-full bg-surface border border-border rounded-lg shadow-lg z-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("shopByCategory")}</h2>
+        <h2 className="text-lg font-semibold text-primary mb-4">{t("shopByCategory")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((cat) => (
             <div key={cat.id}>
               <Link
                 href={`/category/${cat.slug}`}
                 onClick={onClose}
-                className="font-medium text-gray-900 hover:text-blue-600 block mb-2"
+                className="font-medium text-primary hover:text-primary block mb-2"
               >
                 {locale === "ar" ? cat.nameAr : cat.nameEn}
               </Link>
@@ -74,10 +74,10 @@ export function MegaMenu({ categories, locale, isOpen, onClose }: MegaMenuProps)
                     <Link
                       href={`/category/${cat.slug}/${child.slug}`}
                       onClick={onClose}
-                      className="text-sm text-gray-600 hover:text-blue-600 block py-0.5"
+                      className="text-sm text-primary-muted hover:text-primary block py-0.5"
                     >
                       {locale === "ar" ? child.nameAr : child.nameEn}
-                      <span className="text-xs text-gray-400 ms-1">({child._count.products})</span>
+                      <span className="text-xs text-primary-subtle ms-1">({child._count.products})</span>
                     </Link>
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export function MegaMenu({ categories, locale, isOpen, onClose }: MegaMenuProps)
                     <Link
                       href={`/category/${cat.slug}`}
                       onClick={onClose}
-                      className="text-sm text-blue-600 hover:underline block py-0.5"
+                      className="text-sm text-primary hover:underline block py-0.5"
                     >
                       {t("viewAll")}
                     </Link>

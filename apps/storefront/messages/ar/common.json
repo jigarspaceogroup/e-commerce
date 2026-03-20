@@ -29,7 +29,9 @@
     "inStock": "متوفر",
     "free": "مجاناً",
     "required": "مطلوب",
-    "optional": "اختياري"
+    "optional": "اختياري",
+    "promoBanner": "سجل واحصل على خصم 20% على أول طلب.",
+    "promoBannerCta": "سجل الآن"
   },
   "footer": {
     "about": "من نحن",
@@ -45,7 +47,12 @@
     "subscribeSuccess": "تم اشتراكك بنجاح.",
     "customerService": "خدمة العملاء",
     "faq": "الأسئلة الشائعة",
-    "returns": "الإرجاع والاستبدال"
+    "returns": "الإرجاع والاستبدال",
+    "company": "الشركة",
+    "help": "المساعدة",
+    "resources": "الموارد",
+    "newsletterTitle": "ابقَ على اطلاع بأحدث عروضنا",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني"
   },
   "nav": {
     "categories": "الفئات",

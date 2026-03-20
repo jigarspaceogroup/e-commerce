@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { ProductGrid } from "@/components/product/product-grid";
 import ProductFilters from "@/components/product/product-filters";
 import { SortDropdown } from "@/components/product/sort-dropdown";
+import { Button } from "@/components/ui/button";
 import { fetchProducts, parseFiltersFromParams } from "@/lib/api/products";
 import { fetchCategoryTree } from "@/lib/api/categories";
 import { queryKeys } from "@/lib/query-keys";
@@ -100,18 +101,18 @@ export function CategoryProductList({
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+    <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8 py-6">
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="mt-4 mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{categoryName}</h1>
+        <h1 className="font-heading text-display-md font-bold text-primary">{categoryName}</h1>
         {category.descriptionEn && (
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-body-md text-primary-muted">
             {locale === "ar" ? (category.descriptionAr ?? category.descriptionEn) : category.descriptionEn}
           </p>
         )}
         {products.length > 0 && (
-          <p className="mt-1 text-sm text-gray-500">{t("showingCount", { count: products.length })}</p>
+          <p className="mt-1 text-sm text-primary-subtle">{t("showingCount", { count: products.length })}</p>
         )}
       </div>
 
@@ -130,13 +131,13 @@ export function CategoryProductList({
           <ProductGrid products={products} locale={locale} isLoading={isLoading} />
           {hasNextPage && (
             <div className="mt-8 text-center">
-              <button
+              <Button
                 onClick={() => fetchNextPage()}
                 disabled={isFetchingNextPage}
-                className="px-6 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+                variant="secondary"
               >
                 {isFetchingNextPage ? t("loading") : t("loadMore")}
-              </button>
+              </Button>
             </div>
           )}
         </div>

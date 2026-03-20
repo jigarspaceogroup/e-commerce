@@ -25,17 +25,17 @@ export function SpecificationsTable({
 
   return (
     <div data-testid="specifications-table">
-      <h2 className="text-lg font-semibold text-gray-900 mb-3">
+      <h2 className="text-lg font-semibold text-primary mb-3">
         {t("specifications")}
       </h2>
       <table className="w-full">
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-border">
           {visibleEntries.map(([key, value]) => (
             <tr key={key}>
-              <td className="py-2 pe-4 text-sm font-medium text-gray-500 w-1/3">
+              <td className="py-2 pe-4 text-sm font-medium text-primary-muted w-1/3">
                 {key}
               </td>
-              <td className="py-2 text-sm text-gray-900">
+              <td className="py-2 text-sm text-primary">
                 {locale === "ar" ? value.ar || value.en : value.en || value.ar}
               </td>
             </tr>
@@ -46,7 +46,7 @@ export function SpecificationsTable({
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
-          className="mt-2 text-sm text-blue-600 hover:underline"
+          className="mt-2 text-sm text-primary underline"
         >
           {expanded ? t("showLess") : t("showMore")}
         </button>
