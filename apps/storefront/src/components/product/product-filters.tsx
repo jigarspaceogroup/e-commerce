@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { X, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { ProductFilters, CategoryTreeNode } from "@/types/product";
 
 interface ProductFiltersProps {
@@ -72,24 +74,25 @@ export default function ProductFilters({
     <>
       {/* Category Filter */}
       {categories && categories.length > 0 && (
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-900 mb-2">
+        <div className="mb-6 border-t border-border pt-4">
+          <h3 className="text-body-lg font-bold text-primary mb-3 flex items-center justify-between">
             {t("category")}
+            <ChevronDown size={20} />
           </h3>
           <div className="space-y-2">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(category.slug)}
-                className={`w-full text-start px-3 py-2 rounded-lg text-sm transition-colors ${
+                className={`w-full text-start px-3 py-2 text-sm transition-colors ${
                   filters.categorySlug === category.slug
-                    ? "bg-blue-50 text-blue-700 font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? "bg-primary text-on-primary rounded-pill font-medium"
+                    : "bg-surface-muted text-primary-muted rounded-pill hover:bg-surface-muted/80"
                 }`}
               >
                 {locale === "ar" ? category.nameAr : category.nameEn}
                 {category._count.products > 0 && (
-                  <span className="text-gray-500 ms-1">
+                  <span className="text-primary-subtle ms-1">
                     ({category._count.products})
                   </span>
                 )}
@@ -100,9 +103,10 @@ export default function ProductFilters({
       )}
 
       {/* Price Range Filter */}
-      <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-900 mb-2">
+      <div className="mb-6 border-t border-border pt-4">
+        <h3 className="text-body-lg font-bold text-primary mb-3 flex items-center justify-between">
           {t("priceRange")}
+          <ChevronDown size={20} />
         </h3>
         <div className="flex gap-2">
           <input
@@ -112,7 +116,7 @@ export default function ProductFilters({
             onChange={(e) => setLocalPriceMin(e.target.value)}
             onBlur={handlePriceChange}
             onKeyDown={handlePriceKeyDown}
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
+            className="w-full border border-border rounded-pill px-3 py-1.5 text-sm focus:outline-2 focus:outline-primary focus:outline-offset-2"
             min="0"
             step="0.01"
           />
@@ -123,7 +127,7 @@ export default function ProductFilters({
             onChange={(e) => setLocalPriceMax(e.target.value)}
             onBlur={handlePriceChange}
             onKeyDown={handlePriceKeyDown}
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
+            className="w-full border border-border rounded-pill px-3 py-1.5 text-sm focus:outline-2 focus:outline-primary focus:outline-offset-2"
             min="0"
             step="0.01"
           />
@@ -131,16 +135,17 @@ export default function ProductFilters({
       </div>
 
       {/* Availability Filter */}
-      <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-900 mb-2">
+      <div className="mb-6 border-t border-border pt-4">
+        <h3 className="text-body-lg font-bold text-primary mb-3 flex items-center justify-between">
           {t("availability")}
+          <ChevronDown size={20} />
         </h3>
-        <label className="flex items-center gap-2 text-sm">
+        <label className="flex items-center gap-2 text-sm text-primary">
           <input
             type="checkbox"
             checked={filters.inStock ?? false}
             onChange={(e) => handleInStockChange(e.target.checked)}
-            className="rounded border-gray-300"
+            className="rounded border-border accent-primary"
           />
           {t("inStockOnly")}
         </label>
@@ -153,34 +158,19 @@ export default function ProductFilters({
       {/* Mobile Trigger Button */}
       <button
         onClick={() => setDrawerOpen(true)}
-        className="lg:hidden flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+        className="lg:hidden flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm text-primary"
       >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-          />
-        </svg>
+        <SlidersHorizontal size={20} />
         {t("filters")}
       </button>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0">
+      <aside className="hidden lg:block w-[295px] shrink-0">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold">{t("filters")}</h2>
-          <button
-            onClick={handleClearAll}
-            className="text-sm text-blue-600 hover:underline"
-          >
+          <h2 className="text-lg font-semibold text-primary">{t("filters")}</h2>
+          <Button variant="secondary" size="small" onClick={handleClearAll}>
             {t("clearAll")}
-          </button>
+          </Button>
         </div>
         {renderFilterSections()}
       </aside>
@@ -194,21 +184,30 @@ export default function ProductFilters({
           />
           <div className="absolute inset-y-0 start-0 w-80 bg-white shadow-xl overflow-y-auto p-4">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">{t("filters")}</h2>
+              <h2 className="text-lg font-semibold text-primary">{t("filters")}</h2>
               <button
-                onClick={handleClearAll}
-                className="text-sm text-blue-600 hover:underline"
+                onClick={() => setDrawerOpen(false)}
+                className="text-primary-muted hover:text-primary"
+                aria-label="Close"
               >
-                {t("clearAll")}
+                <X size={20} />
               </button>
             </div>
+            <div className="mb-4">
+              <Button variant="secondary" size="small" onClick={handleClearAll}>
+                {t("clearAll")}
+              </Button>
+            </div>
             {renderFilterSections()}
-            <button
-              onClick={() => setDrawerOpen(false)}
-              className="w-full mt-4 bg-blue-600 text-white rounded-lg py-2.5 text-sm font-medium"
-            >
-              {t("applyFilters")}
-            </button>
+            <div className="mt-4">
+              <Button
+                variant="primary"
+                size="full"
+                onClick={() => setDrawerOpen(false)}
+              >
+                {t("applyFilters")}
+              </Button>
+            </div>
           </div>
         </div>
       )}
