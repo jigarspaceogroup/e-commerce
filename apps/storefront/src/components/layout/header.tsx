@@ -3,14 +3,19 @@
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 import { LocaleSwitcher } from "../locale-switcher";
 import { UserMenu } from "./user-menu";
+import { SearchBar } from "@/components/search/search-bar";
+import { MiniCart } from "@/components/cart/mini-cart";
 
 export function Header() {
   const t = useTranslations("common");
   const nav = useTranslations("nav");
+  const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const navLinks = [
     { href: "/shop" as const, label: "Shop" },
@@ -45,28 +50,23 @@ export function Header() {
         </nav>
 
         {/* Search Bar */}
-        <div className="relative flex-1 max-w-[577px]">
-          <Search
-            size={18}
-            className="absolute start-4 top-1/2 -translate-y-1/2 text-primary-subtle"
-          />
-          <input
-            type="search"
-            placeholder={nav("searchPlaceholder")}
-            className="w-full bg-surface-muted rounded-pill py-3 ps-11 pe-4 text-body-md placeholder:text-primary-subtle focus:outline-none"
-          />
-        </div>
+        <SearchBar className="flex-1 max-w-[577px]" />
 
         {/* Right Actions */}
         <div className="flex items-center gap-3.5">
           {/* Cart */}
-          <Link
-            href="/cart"
-            className="p-2 text-primary hover:opacity-70"
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 text-primary hover:opacity-70"
             aria-label={t("cart")}
           >
             <ShoppingCart size={24} />
-          </Link>
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -end-1 w-5 h-5 rounded-full bg-primary text-on-primary text-body-xs flex items-center justify-center">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            )}
+          </button>
 
           {/* User Menu */}
           <UserMenu />
@@ -97,29 +97,26 @@ export function Header() {
         </Link>
 
         {/* Cart */}
-        <Link
-          href="/cart"
-          className="p-2 text-primary hover:opacity-70"
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className="relative p-2 text-primary hover:opacity-70"
           aria-label={t("cart")}
         >
           <ShoppingCart size={24} />
-        </Link>
+          {itemCount > 0 && (
+            <span className="absolute -top-1 -end-1 w-5 h-5 rounded-full bg-primary text-on-primary text-body-xs flex items-center justify-center">
+              {itemCount > 99 ? "99+" : itemCount}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="border-t border-border px-4 pb-4 pt-2 lg:hidden">
           {/* Mobile Search */}
-          <div className="relative mb-4">
-            <Search
-              size={18}
-              className="absolute start-4 top-1/2 -translate-y-1/2 text-primary-subtle"
-            />
-            <input
-              type="search"
-              placeholder={nav("searchPlaceholder")}
-              className="w-full bg-surface-muted rounded-pill py-3 ps-11 pe-4 text-body-md placeholder:text-primary-subtle focus:outline-none"
-            />
+          <div className="mb-4">
+            <SearchBar className="w-full" />
           </div>
 
           {/* Mobile Navigation Links */}
@@ -145,6 +142,9 @@ export function Header() {
           <LocaleSwitcher />
         </div>
       )}
+
+      {/* Mini Cart Drawer */}
+      <MiniCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 }

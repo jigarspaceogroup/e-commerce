@@ -11,8 +11,16 @@ export interface PaginationMeta {
   total?: number;
 }
 
+export interface SearchFacets {
+  brands: Array<{ value: string; count: number }>;
+  categories: Array<{ id: string; nameEn: string; nameAr: string; count: number }>;
+  priceRange: { min: number; max: number };
+}
+
 export interface ResponseMeta {
   pagination?: PaginationMeta;
+  total?: number;
+  facets?: SearchFacets;
 }
 
 export interface ApiResponse<T> {

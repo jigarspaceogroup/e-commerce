@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/lib/auth-context";
 import { ReactQueryProvider } from "@/lib/react-query";
+import { CartProvider } from "@/lib/cart-context";
+import { ToastProvider } from "@/components/shared/toast";
 import { PromoBanner } from "@/components/layout/promo-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -40,11 +42,15 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <ReactQueryProvider>
-              <PromoBanner />
-              <Header />
-              <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
-              <Footer />
-              <MobileNav />
+              <CartProvider>
+                <ToastProvider>
+                  <PromoBanner />
+                  <Header />
+                  <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+                  <Footer />
+                  <MobileNav />
+                </ToastProvider>
+              </CartProvider>
             </ReactQueryProvider>
           </AuthProvider>
         </NextIntlClientProvider>

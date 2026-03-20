@@ -1,0 +1,27 @@
+{
+  "search": {
+    "placeholder": "ابحث عن المنتجات...",
+    "resultsFor": "نتائج \"{query}\"",
+    "resultCount": "{count, plural, one {نتيجة واحدة} two {نتيجتان} few {# نتائج} other {# نتيجة}}",
+    "noResults": "لا توجد نتائج لـ \"{query}\"",
+    "noResultsHint": "جرب مصطلح بحث مختلف أو تصفح الأقسام",
+    "didYouMean": "هل تقصد:",
+    "viewAll": "عرض جميع النتائج لـ \"{query}\"",
+    "products": "المنتجات",
+    "categories": "الأقسام",
+    "brands": "العلامات التجارية",
+    "noSuggestions": "لا توجد اقتراحات لـ \"{query}\"",
+    "filters": "التصفية",
+    "clearAll": "مسح الكل",
+    "priceRange": "نطاق السعر",
+    "inStockOnly": "المتوفر فقط",
+    "brand": "العلامة التجارية",
+    "category": "القسم",
+    "sortBy": "ترتيب حسب",
+    "relevance": "الأكثر صلة",
+    "priceAsc": "السعر: من الأقل إلى الأعلى",
+    "priceDesc": "السعر: من الأعلى إلى الأقل",
+    "newest": "الأحدث",
+    "browseCategoriesTitle": "تصفح الأقسام"
+  }
+}

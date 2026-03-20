@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
+import { useCart } from "@/hooks/use-cart";
+import { useToast } from "@/components/shared/toast";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { PriceDisplay } from "@/components/shared/price-display";
 import { ImageGallery } from "@/components/product/image-gallery";
@@ -20,6 +23,9 @@ interface ProductDetailViewProps {
 export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
   const t = useTranslations("product");
   const tb = useTranslations("breadcrumb");
+  const { addItem, isAddingItem } = useCart();
+  const { showToast } = useToast();
+  const router = useRouter();
 
   const [selectedVariantId, setSelectedVariantId] = useState<string>(
     product.variants[0]?.id ?? "",
@@ -30,6 +36,27 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
   const effectivePrice = selectedVariant?.priceOverride ?? product.basePrice;
   const isOutOfStock = !selectedVariant || selectedVariant.stockQuantity <= 0;
   const maxQuantity = selectedVariant?.stockQuantity ?? 1;
+
+  const handleAddToCart = async () => {
+    if (!selectedVariantId) return;
+    try {
+      await addItem(selectedVariantId, quantity);
+      const title = locale === "ar" ? product.titleAr : product.titleEn;
+      showToast({
+        message: `${title} ${t("addedToCart")}`,
+        variant: "success",
+        action: {
+          label: t("viewCart"),
+          onClick: () => router.push("/cart"),
+        },
+      });
+    } catch {
+      showToast({
+        message: t("addToCartError"),
+        variant: "error",
+      });
+    }
+  };
 
   // Build breadcrumb from category chain
   const breadcrumbItems = [{ label: tb("home"), href: "/" }];
@@ -140,8 +167,8 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
               </Button>
             </div>
           ) : (
-            <Button size="full">
-              {t("addToCart")}
+            <Button size="full" onClick={handleAddToCart} disabled={isAddingItem}>
+              {isAddingItem ? t("adding") : t("addToCart")}
             </Button>
           )}
 

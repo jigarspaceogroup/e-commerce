@@ -126,7 +126,6 @@ async function syncProductAfterStockChange(productId: string): Promise<void> {
       categoryId: product.categoryId,
       status: product.status,
       sku: product.variants[0]?.sku || "",
-      averageRating: 0,
       inStock: product.variants.some((v) => v.stockQuantity > 0),
       createdAt: product.createdAt.toISOString(),
     });

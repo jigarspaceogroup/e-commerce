@@ -1,5 +1,5 @@
 import pino from "pino";
-import pinoHttp from "pino-http";
+import { pinoHttp } from "pino-http";
 import type { Request } from "express";
 
 const isDev = process.env.NODE_ENV !== "production";

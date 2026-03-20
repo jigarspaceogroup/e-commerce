@@ -1,0 +1,27 @@
+{
+  "search": {
+    "placeholder": "Search for products...",
+    "resultsFor": "Results for \"{query}\"",
+    "resultCount": "{count, plural, one {# result} other {# results}}",
+    "noResults": "No results found for \"{query}\"",
+    "noResultsHint": "Try a different search term or browse our categories",
+    "didYouMean": "Did you mean:",
+    "viewAll": "View all results for \"{query}\"",
+    "products": "Products",
+    "categories": "Categories",
+    "brands": "Brands",
+    "noSuggestions": "No suggestions for \"{query}\"",
+    "filters": "Filters",
+    "clearAll": "Clear All",
+    "priceRange": "Price Range",
+    "inStockOnly": "In Stock Only",
+    "brand": "Brand",
+    "category": "Category",
+    "sortBy": "Sort by",
+    "relevance": "Relevance",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low",
+    "newest": "Newest",
+    "browseCategoriesTitle": "Browse Categories"
+  }
+}

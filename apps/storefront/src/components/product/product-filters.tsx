@@ -6,16 +6,24 @@ import { X, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ProductFilters, CategoryTreeNode } from "@/types/product";
 
+interface Facets {
+  brands: Array<{ value: string; count: number }>;
+  categories: Array<{ id: string; nameEn: string; nameAr: string; count: number }>;
+  priceRange: { min: number; max: number };
+}
+
 interface ProductFiltersProps {
   filters: ProductFilters;
   onChange: (filters: ProductFilters) => void;
   categories?: CategoryTreeNode[];
+  facets?: Facets | null;
 }
 
 export default function ProductFilters({
   filters,
   onChange,
   categories,
+  facets,
 }: ProductFiltersProps) {
   const t = useTranslations("filter");
   const locale = useLocale();
@@ -70,6 +78,23 @@ export default function ProductFilters({
     });
   };
 
+  const handleBrandToggle = (brandValue: string) => {
+    const currentBrands = filters.brand ? filters.brand.split(",") : [];
+    const isSelected = currentBrands.includes(brandValue);
+
+    let updatedBrands: string[];
+    if (isSelected) {
+      updatedBrands = currentBrands.filter((b) => b !== brandValue);
+    } else {
+      updatedBrands = [...currentBrands, brandValue];
+    }
+
+    onChange({
+      ...filters,
+      brand: updatedBrands.length > 0 ? updatedBrands.join(",") : undefined,
+    });
+  };
+
   const renderFilterSections = () => (
     <>
       {/* Category Filter */}
@@ -102,6 +127,39 @@ export default function ProductFilters({
         </div>
       )}
 
+      {/* Brand Filter */}
+      {facets && facets.brands && facets.brands.length > 0 && (
+        <div className="mb-6 border-t border-border pt-4">
+          <h3 className="text-body-lg font-bold text-primary mb-3 flex items-center justify-between">
+            {t("brand")}
+            <ChevronDown size={20} />
+          </h3>
+          <div className="space-y-2">
+            {facets.brands.map((brand) => {
+              const selectedBrands = filters.brand ? filters.brand.split(",") : [];
+              const isSelected = selectedBrands.includes(brand.value);
+              return (
+                <label
+                  key={brand.value}
+                  className="flex items-center gap-2 text-sm text-primary cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => handleBrandToggle(brand.value)}
+                    className="rounded border-border accent-primary"
+                  />
+                  <span>
+                    {brand.value}{" "}
+                    <span className="text-primary-subtle">({brand.count})</span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Price Range Filter */}
       <div className="mb-6 border-t border-border pt-4">
         <h3 className="text-body-lg font-bold text-primary mb-3 flex items-center justify-between">
@@ -111,7 +169,7 @@ export default function ProductFilters({
         <div className="flex gap-2">
           <input
             type="number"
-            placeholder={t("priceMin")}
+            placeholder={facets?.priceRange ? `${facets.priceRange.min}` : t("priceMin")}
             value={localPriceMin}
             onChange={(e) => setLocalPriceMin(e.target.value)}
             onBlur={handlePriceChange}
@@ -122,7 +180,7 @@ export default function ProductFilters({
           />
           <input
             type="number"
-            placeholder={t("priceMax")}
+            placeholder={facets?.priceRange ? `${facets.priceRange.max}` : t("priceMax")}
             value={localPriceMax}
             onChange={(e) => setLocalPriceMax(e.target.value)}
             onBlur={handlePriceChange}

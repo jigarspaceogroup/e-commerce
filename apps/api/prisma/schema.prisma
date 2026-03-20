@@ -954,3 +954,16 @@ enum TicketPriority {
   high
   normal
 }
+
+// =============================================================================
+// SEARCH
+// =============================================================================
+
+model SearchSynonym {
+  id        String   @id @default(uuid()) @db.Uuid
+  words     Json     // string[] — e.g., ["mobile", "phone", "smartphone"]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("search_synonyms")
+}

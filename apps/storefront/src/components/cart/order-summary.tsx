@@ -9,12 +9,13 @@ interface OrderSummaryProps {
   subtotal: number;
   discount: number;
   deliveryFee: number;
+  taxAmount: number;
+  grandTotal: number;
   currency?: string;
 }
 
-export function OrderSummary({ subtotal, discount, deliveryFee, currency = "SAR" }: OrderSummaryProps) {
+export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grandTotal, currency = "SAR" }: OrderSummaryProps) {
   const t = useTranslations("cart");
-  const total = subtotal - discount + deliveryFee;
 
   return (
     <div className="border border-border rounded-lg p-5 lg:p-6">
@@ -38,10 +39,14 @@ export function OrderSummary({ subtotal, discount, deliveryFee, currency = "SAR"
             {deliveryFee === 0 ? t("freeShipping") : `${currency} ${deliveryFee.toFixed(2)}`}
           </span>
         </div>
+        <div className="flex items-center justify-between">
+          <span className="text-body-md text-primary-muted">{t("vat")}</span>
+          <span className="text-body-md font-bold text-primary">{currency} {taxAmount.toFixed(2)}</span>
+        </div>
         <hr className="border-border" />
         <div className="flex items-center justify-between">
           <span className="text-body-md text-primary">{t("total")}</span>
-          <span className="text-body-xl font-bold text-primary">{currency} {total.toFixed(2)}</span>
+          <span className="text-body-xl font-bold text-primary">{currency} {grandTotal.toFixed(2)}</span>
         </div>
       </div>
       <div className="mt-5 flex gap-3">

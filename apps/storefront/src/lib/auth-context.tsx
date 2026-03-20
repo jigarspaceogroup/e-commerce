@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { apiClient, setAccessToken as setApiClientToken } from "./api-client";
 
 interface User {
   id: string;
@@ -14,7 +15,7 @@ interface AuthContextType {
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (accessToken: string, user: User) => void;
+  login: (accessToken: string, user: User) => Promise<void>;
   logout: () => Promise<void>;
   setAccessToken: (token: string) => void;
 }
@@ -30,9 +31,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAccessTokenState(token);
   }, []);
 
-  const login = useCallback((token: string, userData: User) => {
+  const login = useCallback(async (token: string, userData: User) => {
+    setApiClientToken(token);
     setAccessTokenState(token);
     setUser(userData);
+    // Merge guest cart if session cookie exists
+    try {
+      if (typeof document !== "undefined" && document.cookie.includes("cart_session")) {
+        await apiClient.post("/cart/merge");
+      }
+    } catch {
+      // Non-blocking — merge failure shouldn't break login
+    }
   }, []);
 
   const logout = useCallback(async () => {

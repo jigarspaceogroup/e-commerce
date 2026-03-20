@@ -14,6 +14,7 @@ const modules = [
   "order",
   "profile",
   "error",
+  "search",
 ] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
