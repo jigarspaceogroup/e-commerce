@@ -9,12 +9,12 @@ export function Footer() {
   const common = useTranslations("common");
 
   return (
-    <footer className="bg-surface-muted pt-16">
+    <footer className="bg-surface-muted pt-16 mt-27.5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Newsletter Section */}
-        <div className="bg-primary rounded-lg p-9 lg:p-16 lg:flex lg:items-center lg:justify-between">
+        <div className="bg-primary rounded-lg p-9 lg:p-16 lg:flex lg:items-center lg:justify-between -mt-42.5">
           <div className="mb-6 lg:mb-0">
-            <h2 className="font-heading text-display-md font-bold text-on-primary max-w-[550px]">
+            <h2 className="font-heading text-display-md font-bold text-on-primary max-w-137.5">
               {t("newsletterTitle")}
             </h2>
           </div>
