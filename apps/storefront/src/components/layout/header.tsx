@@ -8,12 +8,14 @@ import { useCart } from "@/hooks/use-cart";
 import { LocaleSwitcher } from "../locale-switcher";
 import { UserMenu } from "./user-menu";
 import { SearchBar } from "@/components/search/search-bar";
+import { MiniCart } from "@/components/cart/mini-cart";
 
 export function Header() {
   const t = useTranslations("common");
   const nav = useTranslations("nav");
   const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const navLinks = [
     { href: "/shop" as const, label: "Shop" },
@@ -53,8 +55,8 @@ export function Header() {
         {/* Right Actions */}
         <div className="flex items-center gap-3.5">
           {/* Cart */}
-          <Link
-            href="/cart"
+          <button
+            onClick={() => setIsCartOpen(true)}
             className="relative p-2 text-primary hover:opacity-70"
             aria-label={t("cart")}
           >
@@ -64,7 +66,7 @@ export function Header() {
                 {itemCount > 99 ? "99+" : itemCount}
               </span>
             )}
-          </Link>
+          </button>
 
           {/* User Menu */}
           <UserMenu />
@@ -95,8 +97,8 @@ export function Header() {
         </Link>
 
         {/* Cart */}
-        <Link
-          href="/cart"
+        <button
+          onClick={() => setIsCartOpen(true)}
           className="relative p-2 text-primary hover:opacity-70"
           aria-label={t("cart")}
         >
@@ -106,7 +108,7 @@ export function Header() {
               {itemCount > 99 ? "99+" : itemCount}
             </span>
           )}
-        </Link>
+        </button>
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -140,6 +142,9 @@ export function Header() {
           <LocaleSwitcher />
         </div>
       )}
+
+      {/* Mini Cart Drawer */}
+      <MiniCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 }
