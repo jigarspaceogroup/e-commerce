@@ -45,7 +45,12 @@
     "subscribeSuccess": "You have been subscribed successfully.",
     "customerService": "Customer Service",
     "faq": "FAQ",
-    "returns": "Returns & Exchanges"
+    "returns": "Returns & Exchanges",
+    "company": "COMPANY",
+    "help": "HELP",
+    "resources": "RESOURCES",
+    "newsletterTitle": "STAY UPTO DATE ABOUT OUR LATEST OFFERS",
+    "emailPlaceholder": "Enter your email address"
   },
   "nav": {
     "categories": "Categories",

@@ -45,7 +45,12 @@
     "subscribeSuccess": "تم اشتراكك بنجاح.",
     "customerService": "خدمة العملاء",
     "faq": "الأسئلة الشائعة",
-    "returns": "الإرجاع والاستبدال"
+    "returns": "الإرجاع والاستبدال",
+    "company": "الشركة",
+    "help": "المساعدة",
+    "resources": "الموارد",
+    "newsletterTitle": "ابقَ على اطلاع بأحدث عروضنا",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني"
   },
   "nav": {
     "categories": "الفئات",
