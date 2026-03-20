@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 import { LocaleSwitcher } from "../locale-switcher";
 import { UserMenu } from "./user-menu";
 import { SearchBar } from "@/components/search/search-bar";
@@ -11,6 +12,7 @@ import { SearchBar } from "@/components/search/search-bar";
 export function Header() {
   const t = useTranslations("common");
   const nav = useTranslations("nav");
+  const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -53,10 +55,15 @@ export function Header() {
           {/* Cart */}
           <Link
             href="/cart"
-            className="p-2 text-primary hover:opacity-70"
+            className="relative p-2 text-primary hover:opacity-70"
             aria-label={t("cart")}
           >
             <ShoppingCart size={24} />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -end-1 w-5 h-5 rounded-full bg-primary text-on-primary text-body-xs flex items-center justify-center">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            )}
           </Link>
 
           {/* User Menu */}
@@ -90,10 +97,15 @@ export function Header() {
         {/* Cart */}
         <Link
           href="/cart"
-          className="p-2 text-primary hover:opacity-70"
+          className="relative p-2 text-primary hover:opacity-70"
           aria-label={t("cart")}
         >
           <ShoppingCart size={24} />
+          {itemCount > 0 && (
+            <span className="absolute -top-1 -end-1 w-5 h-5 rounded-full bg-primary text-on-primary text-body-xs flex items-center justify-center">
+              {itemCount > 99 ? "99+" : itemCount}
+            </span>
+          )}
         </Link>
       </div>
 

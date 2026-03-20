@@ -2,6 +2,10 @@
   "product": {
     "allProducts": "All Products",
     "addToCart": "Add to Cart",
+    "adding": "Adding...",
+    "addedToCart": "added to cart",
+    "addToCartError": "Failed to add to cart",
+    "viewCart": "View Cart",
     "outOfStock": "Out of Stock",
     "notifyWhenAvailable": "Notify When Available",
     "quantity": "Quantity",
