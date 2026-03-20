@@ -51,8 +51,8 @@ describe("ProductCard", () => {
     expect(link).toHaveAttribute("href", "/products/test-product");
   });
 
-  it("renders category name", () => {
+  it("renders rating stars", () => {
     renderWithProviders(<ProductCard product={mockProduct} locale="en" />);
-    expect(screen.getByText("Electronics")).toBeInTheDocument();
+    expect(screen.getByText("4.5/5")).toBeInTheDocument();
   });
 });
