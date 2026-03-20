@@ -67,6 +67,11 @@ export async function initProductIndex(): Promise<Index> {
     "كانت", "ليس", "لا", "ما", "أن", "إن", "قد", "و",
   ]);
 
+  await index.updateTypoTolerance({
+    enabled: true,
+    minWordSizeForTypos: { oneTypo: 5, twoTypos: 9 },
+  });
+
   return index;
 }
 
