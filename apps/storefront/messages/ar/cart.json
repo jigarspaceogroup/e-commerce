@@ -1,6 +1,7 @@
 {
   "cart": {
     "title": "سلة التسوق",
+    "orderSummary": "ملخص الطلب",
     "empty": "سلتك فارغة",
     "emptyMessage": "يبدو أنك لم تضف أي منتجات إلى سلتك بعد.",
     "startShopping": "ابدأ التسوق",

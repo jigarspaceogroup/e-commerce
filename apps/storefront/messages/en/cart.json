@@ -1,6 +1,7 @@
 {
   "cart": {
-    "title": "Shopping Cart",
+    "title": "YOUR CART",
+    "orderSummary": "Order Summary",
     "empty": "Your cart is empty",
     "emptyMessage": "Looks like you haven't added anything to your cart yet.",
     "startShopping": "Start Shopping",
