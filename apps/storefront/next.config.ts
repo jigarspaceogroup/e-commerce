@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       { protocol: "http", hostname: "localhost", port: "4000", pathname: "/uploads/**" },
-      { protocol: "https", hostname: "placehold.co" },
+      { protocol: "https", hostname: "placehold.co", pathname: "/**" },
     ],
   },
   async headers() {
