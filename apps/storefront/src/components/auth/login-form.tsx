@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { apiClient } from "@/lib/api-client";
 import { useAuth } from "@/lib/auth-context";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { OtpInput } from "./otp-input";
 
 type Mode = "email" | "phone";
@@ -135,12 +137,12 @@ export function LoginForm() {
   return (
     <div className="space-y-6">
       {/* Mode tabs */}
-      <div className="flex rounded-lg border border-gray-200">
+      <div className="flex gap-2">
         <button
           type="button"
           onClick={() => { setMode("email"); setError(""); }}
-          className={`flex-1 rounded-s-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-            mode === "email" ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-50"
+          className={`flex-1 rounded-pill px-4 py-2.5 text-body-sm font-medium transition-colors ${
+            mode === "email" ? "bg-primary text-on-primary" : "bg-transparent text-primary-muted hover:bg-black/5"
           }`}
         >
           {t("register.emailTab")}
@@ -148,8 +150,8 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => { setMode("phone"); setPhoneStep("phone"); setError(""); }}
-          className={`flex-1 rounded-e-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-            mode === "phone" ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-50"
+          className={`flex-1 rounded-pill px-4 py-2.5 text-body-sm font-medium transition-colors ${
+            mode === "phone" ? "bg-primary text-on-primary" : "bg-transparent text-primary-muted hover:bg-black/5"
           }`}
         >
           {t("register.phoneTab")}
@@ -157,52 +159,50 @@ export function LoginForm() {
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</div>
+        <div className="rounded-md bg-accent-red-bg p-3 text-body-sm text-accent-red">{error}</div>
       )}
 
       {/* Email login */}
       {mode === "email" && (
         <form onSubmit={handleEmailLogin} className="space-y-4">
           <div>
-            <label htmlFor="login-email" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="login-email" className="mb-1 block text-body-sm font-medium text-primary">
               {t("login.emailLabel")}
             </label>
-            <input
+            <Input
               id="login-email"
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
 
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <label htmlFor="login-password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="login-password" className="block text-body-sm font-medium text-primary">
                 {t("login.passwordLabel")}
               </label>
-              <a href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-700">
+              <a href="/forgot-password" className="text-body-sm text-primary underline hover:opacity-80">
                 {t("login.forgotPassword")}
               </a>
             </div>
-            <input
+            <Input
               id="login-password"
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            size="full"
           >
             {loading ? common("loading") : t("login.loginButton")}
-          </button>
+          </Button>
         </form>
       )}
 
@@ -210,10 +210,10 @@ export function LoginForm() {
       {mode === "phone" && phoneStep === "phone" && (
         <form onSubmit={handlePhoneSubmit} className="space-y-4">
           <div>
-            <label htmlFor="login-phone" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="login-phone" className="mb-1 block text-body-sm font-medium text-primary">
               {t("register.phone")}
             </label>
-            <input
+            <Input
               id="login-phone"
               type="tel"
               required
@@ -222,17 +222,16 @@ export function LoginForm() {
               pattern="^\+9665\d{8}$"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            size="full"
           >
             {loading ? common("loading") : t("login.loginButton")}
-          </button>
+          </Button>
         </form>
       )}
 
@@ -240,32 +239,32 @@ export function LoginForm() {
       {mode === "phone" && phoneStep === "otp" && (
         <form onSubmit={handleOtpVerify} className="space-y-4">
           <div className="text-center">
-            <h3 className="text-lg font-semibold text-gray-900">{t("otp.enterOtp")}</h3>
-            <p className="mt-1 text-sm text-gray-600">
+            <h3 className="font-heading text-heading-md font-bold text-primary">{t("otp.enterOtp")}</h3>
+            <p className="mt-1 text-body-sm text-primary-muted">
               {t("otp.otpSent", { destination: phone })}
             </p>
           </div>
 
           <OtpInput value={otpCode} onChange={setOtpCode} disabled={loading} />
 
-          <button
+          <Button
             type="submit"
             disabled={loading || otpCode.length !== 6}
-            className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            size="full"
           >
             {loading ? common("loading") : common("confirm")}
-          </button>
+          </Button>
 
           <div className="text-center">
             {resendTimer > 0 ? (
-              <p className="text-sm text-gray-500">
+              <p className="text-body-sm text-primary-muted">
                 {t("otp.resendIn", { seconds: String(resendTimer) })}
               </p>
             ) : (
               <button
                 type="button"
                 onClick={handleResend}
-                className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                className="text-body-sm text-primary underline hover:opacity-80"
               >
                 {t("otp.resendOtp")}
               </button>

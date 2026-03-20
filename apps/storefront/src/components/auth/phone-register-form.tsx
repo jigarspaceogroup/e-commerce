@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { apiClient } from "@/lib/api-client";
 import { useAuth } from "@/lib/auth-context";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { OtpInput } from "./otp-input";
 
 type Step = "phone" | "otp";
@@ -121,40 +123,40 @@ export function PhoneRegisterForm() {
     return (
       <form onSubmit={handleOtpSubmit} className="space-y-4">
         {error && (
-          <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+          <div className="rounded-md bg-accent-red-bg p-3 text-body-sm text-accent-red">
             {error}
           </div>
         )}
 
         <div className="text-center">
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="font-heading text-heading-md font-bold text-primary">
             {t("otp.enterOtp")}
           </h3>
-          <p className="mt-1 text-sm text-gray-600">
+          <p className="mt-1 text-body-sm text-primary-muted">
             {t("otp.otpSent", { destination: form.phone })}
           </p>
         </div>
 
         <OtpInput value={otpCode} onChange={setOtpCode} disabled={loading} />
 
-        <button
+        <Button
           type="submit"
           disabled={loading || otpCode.length !== 6}
-          className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+          size="full"
         >
           {loading ? common("loading") : common("confirm")}
-        </button>
+        </Button>
 
         <div className="text-center">
           {resendTimer > 0 ? (
-            <p className="text-sm text-gray-500">
+            <p className="text-body-sm text-primary-muted">
               {t("otp.resendIn", { seconds: String(resendTimer) })}
             </p>
           ) : (
             <button
               type="button"
               onClick={handleResend}
-              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+              className="text-body-sm text-primary underline hover:opacity-80"
             >
               {t("otp.resendOtp")}
             </button>
@@ -167,7 +169,7 @@ export function PhoneRegisterForm() {
   return (
     <form onSubmit={handlePhoneSubmit} className="space-y-4">
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+        <div className="rounded-md bg-accent-red-bg p-3 text-body-sm text-accent-red">
           {error}
         </div>
       )}
@@ -176,33 +178,31 @@ export function PhoneRegisterForm() {
         <div>
           <label
             htmlFor="phone-firstName"
-            className="mb-1 block text-sm font-medium text-gray-700"
+            className="mb-1 block text-body-sm font-medium text-primary"
           >
             {t("register.firstName")}
           </label>
-          <input
+          <Input
             id="phone-firstName"
             type="text"
             required
             value={form.firstName}
             onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
         <div>
           <label
             htmlFor="phone-lastName"
-            className="mb-1 block text-sm font-medium text-gray-700"
+            className="mb-1 block text-body-sm font-medium text-primary"
           >
             {t("register.lastName")}
           </label>
-          <input
+          <Input
             id="phone-lastName"
             type="text"
             required
             value={form.lastName}
             onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
       </div>
@@ -210,11 +210,11 @@ export function PhoneRegisterForm() {
       <div>
         <label
           htmlFor="phone"
-          className="mb-1 block text-sm font-medium text-gray-700"
+          className="mb-1 block text-body-sm font-medium text-primary"
         >
           {t("register.phone")}
         </label>
-        <input
+        <Input
           id="phone"
           type="tel"
           required
@@ -223,17 +223,16 @@ export function PhoneRegisterForm() {
           pattern="^\+9665\d{8}$"
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+        size="full"
       >
         {loading ? common("loading") : t("register.createAccount")}
-      </button>
+      </Button>
     </form>
   );
 }
