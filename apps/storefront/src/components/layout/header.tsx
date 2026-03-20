@@ -3,9 +3,10 @@
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
 import { LocaleSwitcher } from "../locale-switcher";
 import { UserMenu } from "./user-menu";
+import { SearchBar } from "@/components/search/search-bar";
 
 export function Header() {
   const t = useTranslations("common");
@@ -45,17 +46,7 @@ export function Header() {
         </nav>
 
         {/* Search Bar */}
-        <div className="relative flex-1 max-w-[577px]">
-          <Search
-            size={18}
-            className="absolute start-4 top-1/2 -translate-y-1/2 text-primary-subtle"
-          />
-          <input
-            type="search"
-            placeholder={nav("searchPlaceholder")}
-            className="w-full bg-surface-muted rounded-pill py-3 ps-11 pe-4 text-body-md placeholder:text-primary-subtle focus:outline-none"
-          />
-        </div>
+        <SearchBar className="flex-1 max-w-[577px]" />
 
         {/* Right Actions */}
         <div className="flex items-center gap-3.5">
@@ -110,16 +101,8 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="border-t border-border px-4 pb-4 pt-2 lg:hidden">
           {/* Mobile Search */}
-          <div className="relative mb-4">
-            <Search
-              size={18}
-              className="absolute start-4 top-1/2 -translate-y-1/2 text-primary-subtle"
-            />
-            <input
-              type="search"
-              placeholder={nav("searchPlaceholder")}
-              className="w-full bg-surface-muted rounded-pill py-3 ps-11 pe-4 text-body-md placeholder:text-primary-subtle focus:outline-none"
-            />
+          <div className="mb-4">
+            <SearchBar className="w-full" />
           </div>
 
           {/* Mobile Navigation Links */}
