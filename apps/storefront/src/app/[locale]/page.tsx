@@ -1,16 +1,19 @@
-import { useTranslations } from "next-intl";
-import { LocaleSwitcher } from "@/components/locale-switcher";
+import { HeroSection } from "@/components/home/hero-section";
+import { BrandBar } from "@/components/home/brand-bar";
+import { ProductSection } from "@/components/home/product-section";
+import { BrowseByStyle } from "@/components/home/browse-by-style";
+import { Testimonials } from "@/components/home/testimonials";
 
 export default function HomePage() {
-  const t = useTranslations("common");
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="absolute end-4 top-4">
-        <LocaleSwitcher />
-      </div>
-      <h1 className="text-4xl font-bold">{t("appName")}</h1>
-      <p className="mt-4 text-lg text-gray-600">{t("home")}</p>
-    </main>
+    <>
+      <HeroSection />
+      <BrandBar />
+      <ProductSection titleKey="newArrivals" sortBy="createdAt" />
+      <hr className="mx-auto max-w-[1240px] border-border" />
+      <ProductSection titleKey="topSelling" sortBy="salesCount" />
+      <BrowseByStyle />
+      <Testimonials />
+    </>
   );
 }
