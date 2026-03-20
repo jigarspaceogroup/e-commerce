@@ -10,6 +10,7 @@ import { adminCustomerRouter } from "./admin/customers.js";
 import { adminSearchRouter } from "./admin/search.js";
 import { publicCategoryRouter } from "./categories.js";
 import { publicProductRouter } from "./products.js";
+import { searchRouter } from "./search.js";
 import { oauthRouter } from "../oauth.js";
 
 const v1Router: IRouter = Router();
@@ -26,5 +27,6 @@ v1Router.use("/admin/customers", adminCustomerRouter);
 v1Router.use("/admin/search", adminSearchRouter);
 v1Router.use("/categories", publicCategoryRouter);
 v1Router.use("/products", publicProductRouter);
+v1Router.use("/search", searchRouter);
 
 export { v1Router };
