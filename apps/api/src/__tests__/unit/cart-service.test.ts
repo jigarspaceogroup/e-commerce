@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { Decimal } from "@prisma/client/runtime/library";
+import type { Decimal } from "@prisma/client/runtime/client";
 
 // Mock Prisma
 vi.mock("../../lib/prisma.js", () => ({

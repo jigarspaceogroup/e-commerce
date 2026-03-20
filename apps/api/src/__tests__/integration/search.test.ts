@@ -77,8 +77,12 @@ vi.mock("../../lib/prisma.js", () => ({
 
 import { app } from "../../app.js";
 import { prisma } from "../../lib/prisma.js";
-import { getRedisClient } from "../../services/redis.js";
-import { mockSearch, mockUpdateSynonyms } from "../../services/search.js";
+import { getSearchClient } from "../../services/search.js";
+
+// Get mock functions from the mocked module
+const mockSearchClient = getSearchClient() as any;
+const mockSearch = mockSearchClient.index().search as ReturnType<typeof vi.fn>;
+const mockUpdateSynonyms = mockSearchClient.index().updateSynonyms as ReturnType<typeof vi.fn>;
 
 const AUTH_HEADER = "Bearer valid-token";
 

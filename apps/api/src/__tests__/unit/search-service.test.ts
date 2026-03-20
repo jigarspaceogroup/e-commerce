@@ -288,14 +288,14 @@ describe("Search Service", () => {
 
       expect(result.success).toBe(true);
       expect(result.data.suggestions).toHaveLength(4);
-      expect(result.data.suggestions[0].type).toBe("product");
-      expect(result.data.suggestions[0].textEn).toBe("Laptop");
-      expect(result.data.suggestions[0].url).toBe("/products/laptop");
-      expect(result.data.suggestions[2].type).toBe("category");
-      expect(result.data.suggestions[2].textEn).toBe("Laptops");
-      expect(result.data.suggestions[2].url).toBe("/category/laptops");
-      expect(result.data.suggestions[3].type).toBe("brand");
-      expect(result.data.suggestions[3].textEn).toBe("Dell");
+      expect(result.data.suggestions[0]!.type).toBe("product");
+      expect(result.data.suggestions[0]!.textEn).toBe("Laptop");
+      expect(result.data.suggestions[0]!.url).toBe("/products/laptop");
+      expect(result.data.suggestions[2]!.type).toBe("category");
+      expect(result.data.suggestions[2]!.textEn).toBe("Laptops");
+      expect(result.data.suggestions[2]!.url).toBe("/category/laptops");
+      expect(result.data.suggestions[3]!.type).toBe("brand");
+      expect(result.data.suggestions[3]!.textEn).toBe("Dell");
     });
 
     it("caps total suggestions at 8", async () => {

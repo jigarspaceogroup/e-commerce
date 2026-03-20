@@ -155,7 +155,7 @@ export function SearchResultsClient({ initialQuery }: SearchResultsClientProps) 
         <div className="flex-1">
           {products.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
-              {products.map((product: any) => (
+              {products.map((product) => (
                 <ProductCard key={product.id} product={product} locale={locale} />
               ))}
             </div>

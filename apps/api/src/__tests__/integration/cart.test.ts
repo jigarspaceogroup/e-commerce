@@ -95,16 +95,6 @@ const sampleVariant = {
   product: sampleProduct,
 };
 
-const sampleCartItem = {
-  id: ITEM_ID,
-  cartId: CART_ID,
-  productVariantId: VARIANT_ID,
-  quantity: 1,
-  variant: {
-    ...sampleVariant,
-    product: { basePrice: 99.99 }, // for recalculate
-  },
-};
 
 const emptyCart = {
   id: CART_ID,

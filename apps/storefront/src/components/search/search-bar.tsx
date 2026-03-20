@@ -50,7 +50,7 @@ export function SearchBar({ className }: SearchBarProps) {
     } else if (e.key === "Enter") {
       e.preventDefault();
       if (activeIndex >= 0 && activeIndex < suggestions.length) {
-        handleSelect(suggestions[activeIndex].url);
+        handleSelect(suggestions[activeIndex]!.url);
       } else {
         // Submit search
         if (inputValue.trim()) {

@@ -173,7 +173,7 @@ const categories = [
 ];
 
 // Mock Meilisearch with intelligent query-based responses
-const mockSearch = vi.fn().mockImplementation((query: string, opts?: any) => {
+const mockSearch = vi.fn().mockImplementation((query: string, _opts?: any) => {
   const makeResult = (hits: any[], totalHits?: number) => ({
     hits,
     estimatedTotalHits: totalHits ?? hits.length,

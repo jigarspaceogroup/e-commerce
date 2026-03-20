@@ -1,6 +1,7 @@
 import { apiClient } from "../api-client";
+import type { ProductListItem } from "@/types/product";
 
-interface SearchFilters {
+export interface SearchFilters {
   q: string;
   categoryId?: string;
   brands?: string[];
@@ -10,6 +11,13 @@ interface SearchFilters {
   sort?: "relevance" | "price_asc" | "price_desc" | "newest";
   limit?: number;
   offset?: number;
+}
+
+export interface SearchSuggestion {
+  type: "product" | "category" | "brand";
+  textEn: string;
+  textAr: string;
+  url: string;
 }
 
 export async function fetchSearchResults(filters: SearchFilters) {
@@ -29,13 +37,13 @@ export async function fetchSearchResults(filters: SearchFilters) {
     params.brand = filters.brands.join(",");
   }
 
-  const res = await apiClient.get("/search", params);
+  const res = await apiClient.get<ProductListItem[]>("/search", params);
   if (!res.success) throw new Error(res.error?.message ?? "Search failed");
   return res;
 }
 
 export async function fetchSuggestions(q: string) {
-  const res = await apiClient.get("/search/suggest", { q });
+  const res = await apiClient.get<{ suggestions: SearchSuggestion[] }>("/search/suggest", { q });
   if (!res.success) throw new Error(res.error?.message ?? "Suggestions failed");
   return res;
 }
