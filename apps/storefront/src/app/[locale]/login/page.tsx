@@ -2,7 +2,6 @@
 
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { LoginForm } from "@/components/auth/login-form";
 
 export default function LoginPage() {

@@ -4,7 +4,6 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/lib/auth-context";
-import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function UserMenu() {
@@ -31,12 +30,12 @@ export function UserMenu() {
   if (!isAuthenticated) {
     return (
       <div className="flex items-center gap-2">
-        <Button asChild variant="ghost" size="sm">
-          <Link href="/login">{t("login")}</Link>
-        </Button>
-        <Button asChild size="sm">
-          <Link href="/register">{t("register")}</Link>
-        </Button>
+        <Link href="/login">
+          <Button variant="secondary" size="small">{t("login")}</Button>
+        </Link>
+        <Link href="/register">
+          <Button size="small">{t("register")}</Button>
+        </Link>
       </div>
     );
   }

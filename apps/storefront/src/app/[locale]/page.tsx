@@ -9,9 +9,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <BrandBar />
-      <ProductSection titleKey="newArrivals" sortBy="createdAt" />
+      <ProductSection titleKey="newArrivals" sortBy="newest" />
       <hr className="mx-auto max-w-[1240px] border-border" />
-      <ProductSection titleKey="topSelling" sortBy="salesCount" />
+      <ProductSection titleKey="topSelling" sortBy="popularity" />
       <BrowseByStyle />
       <Testimonials />
     </>

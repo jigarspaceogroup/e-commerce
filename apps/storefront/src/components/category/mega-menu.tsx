@@ -4,7 +4,6 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { CategoryTreeNode } from "@/types/product";
-import { ChevronRight } from "lucide-react";
 
 interface MegaMenuProps {
   categories: CategoryTreeNode[];

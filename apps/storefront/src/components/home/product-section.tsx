@@ -8,10 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { fetchProducts } from "@/lib/api/products";
 import { queryKeys } from "@/lib/query-keys";
+import type { ProductFilters } from "@/types/product";
 
 interface ProductSectionProps {
   titleKey: string;
-  sortBy: string;
+  sortBy: ProductFilters["sortBy"];
 }
 
 export function ProductSection({ titleKey, sortBy }: ProductSectionProps) {

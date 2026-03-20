@@ -96,8 +96,8 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
             <p className="text-sm text-primary-subtle">{product.brand}</p>
           )}
 
-          {/* Rating */}
-          <RatingStars rating={product.averageRating ?? 0} showValue />
+          {/* Rating — placeholder until reviews are implemented */}
+          <RatingStars rating={4.5} showValue />
 
           {/* Price */}
           <PriceDisplay

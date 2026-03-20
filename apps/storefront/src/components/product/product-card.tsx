@@ -67,9 +67,8 @@ export function ProductCard({ product, locale }: ProductCardProps) {
         <h3 className="text-primary text-body-lg font-bold truncate">
           {locale === "ar" ? product.titleAr : product.titleEn}
         </h3>
-        {product.averageRating !== null && product.averageRating !== undefined && (
-          <RatingStars rating={product.averageRating ?? 0} size={16} showValue />
-        )}
+        {/* Rating — placeholder until reviews are implemented */}
+        <RatingStars rating={4.5} size={16} showValue />
         <PriceDisplay
           basePrice={product.basePrice}
           compareAtPrice={product.compareAtPrice}
