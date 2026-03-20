@@ -8,6 +8,8 @@ import { ImageGallery } from "@/components/product/image-gallery";
 import { VariantSelector } from "@/components/product/variant-selector";
 import { SpecificationsTable } from "@/components/product/specifications-table";
 import { QuantitySelector } from "@/components/product/quantity-selector";
+import { Button } from "@/components/ui/button";
+import { RatingStars } from "@/components/ui/rating-stars";
 import type { ProductDetail } from "@/types/product";
 
 interface ProductDetailViewProps {
@@ -72,7 +74,7 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+    <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8 py-6">
       <Breadcrumb items={breadcrumbItems} />
 
       {/* Main layout */}
@@ -87,12 +89,15 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
         {/* End: Product Info */}
         <div className="space-y-6">
           {/* Title */}
-          <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+          <h1 className="font-heading text-display-md font-bold text-primary">{title}</h1>
 
           {/* Brand */}
           {product.brand && (
-            <p className="text-sm text-gray-500">{product.brand}</p>
+            <p className="text-sm text-primary-subtle">{product.brand}</p>
           )}
+
+          {/* Rating */}
+          <RatingStars rating={product.averageRating ?? 0} showValue />
 
           {/* Price */}
           <PriceDisplay
@@ -115,7 +120,7 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
           {/* Quantity */}
           {!isOutOfStock && (
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">{t("quantity")}</h3>
+              <h3 className="text-sm font-medium text-primary mb-2">{t("quantity")}</h3>
               <QuantitySelector
                 value={quantity}
                 onChange={setQuantity}
@@ -127,32 +132,29 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
           {/* Add to Cart / Out of Stock */}
           {isOutOfStock ? (
             <div className="space-y-2">
-              <button
-                disabled
-                className="w-full py-3 bg-gray-300 text-gray-500 rounded-lg text-sm font-medium cursor-not-allowed"
-              >
+              <Button size="full" disabled>
                 {t("outOfStock")}
-              </button>
-              <button className="w-full py-3 border border-blue-600 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-50">
+              </Button>
+              <Button size="full" variant="secondary">
                 {t("notifyWhenAvailable")}
-              </button>
+              </Button>
             </div>
           ) : (
-            <button className="w-full py-3 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
+            <Button size="full">
               {t("addToCart")}
-            </button>
+            </Button>
           )}
 
           {/* Delivery + Returns */}
-          <div className="border-t border-gray-200 pt-4 space-y-2">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="border-t border-border pt-4 space-y-2">
+            <div className="flex items-center gap-2 text-sm text-primary-muted">
+              <svg className="h-5 w-5 text-primary-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
               </svg>
               {t("deliveryEstimate")}
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center gap-2 text-sm text-primary-muted">
+              <svg className="h-5 w-5 text-primary-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               {t("returnPolicy")}
@@ -164,8 +166,8 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
       {/* Description */}
       {description && (
         <div className="mt-12">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">{t("description")}</h2>
-          <div className="text-sm text-gray-700 leading-relaxed prose max-w-none">
+          <h2 className="text-lg font-semibold text-primary mb-3">{t("description")}</h2>
+          <div className="text-body-md text-primary-muted leading-relaxed prose max-w-none">
             {description}
           </div>
         </div>
@@ -179,8 +181,8 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
       {/* FAQ */}
       {product.faq && product.faq.length > 0 && (
         <div className="mt-12">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("faq")}</h2>
-          <div className="divide-y divide-gray-200">
+          <h2 className="text-lg font-semibold text-primary mb-4">{t("faq")}</h2>
+          <div className="divide-y divide-border">
             {product.faq.map((item, idx) => {
               const question = locale === "ar" ? item.question.ar : item.question.en;
               const answer = locale === "ar" ? item.answer.ar : item.answer.en;
@@ -191,18 +193,18 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
                   <button
                     type="button"
                     onClick={() => setExpandedFaq(isExpanded ? null : idx)}
-                    className="flex items-center justify-between w-full py-4 text-start text-sm font-medium text-gray-900"
+                    className="flex items-center justify-between w-full py-4 text-start text-sm font-medium text-primary"
                   >
                     {question}
                     <svg
-                      className={`h-5 w-5 text-gray-400 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                      className={`h-5 w-5 text-primary-subtle transition-transform ${isExpanded ? "rotate-180" : ""}`}
                       fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
                   {isExpanded && (
-                    <p className="pb-4 text-sm text-gray-600">{answer}</p>
+                    <p className="pb-4 text-sm text-primary-muted">{answer}</p>
                   )}
                 </div>
               );
