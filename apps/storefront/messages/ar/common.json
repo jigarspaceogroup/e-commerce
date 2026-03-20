@@ -29,7 +29,9 @@
     "inStock": "متوفر",
     "free": "مجاناً",
     "required": "مطلوب",
-    "optional": "اختياري"
+    "optional": "اختياري",
+    "promoBanner": "سجل واحصل على خصم 20% على أول طلب.",
+    "promoBannerCta": "سجل الآن"
   },
   "footer": {
     "about": "من نحن",

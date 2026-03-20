@@ -29,7 +29,9 @@
     "inStock": "In Stock",
     "free": "Free",
     "required": "Required",
-    "optional": "Optional"
+    "optional": "Optional",
+    "promoBanner": "Sign up and get 20% off your first order.",
+    "promoBannerCta": "Sign Up Now"
   },
   "footer": {
     "about": "About Us",
