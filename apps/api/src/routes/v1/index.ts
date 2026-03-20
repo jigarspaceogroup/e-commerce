@@ -12,6 +12,7 @@ import { publicCategoryRouter } from "./categories.js";
 import { publicProductRouter } from "./products.js";
 import { searchRouter } from "./search.js";
 import { oauthRouter } from "../oauth.js";
+import { cartRouter } from "./cart.js";
 
 const v1Router: IRouter = Router();
 
@@ -28,5 +29,6 @@ v1Router.use("/admin/search", adminSearchRouter);
 v1Router.use("/categories", publicCategoryRouter);
 v1Router.use("/products", publicProductRouter);
 v1Router.use("/search", searchRouter);
+v1Router.use("/cart", cartRouter);
 
 export { v1Router };
