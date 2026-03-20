@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/lib/auth-context";
 import { ReactQueryProvider } from "@/lib/react-query";
+import { PromoBanner } from "@/components/layout/promo-banner";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <ReactQueryProvider>
+              <PromoBanner />
               <Header />
               <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
               <Footer />
