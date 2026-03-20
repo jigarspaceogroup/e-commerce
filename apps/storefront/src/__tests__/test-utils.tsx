@@ -7,12 +7,16 @@ import arMessages from "../../messages/ar.json";
 
 const messages: Record<string, Record<string, unknown>> = { en: enMessages, ar: arMessages };
 
+// Stable router mocks — import these in tests that need to assert on router.push/replace
+export const mockRouterPush = vi.fn();
+export const mockRouterReplace = vi.fn();
+
 // Mock navigation
 vi.mock("@/i18n/navigation", () => ({
   Link: ({ href, children, ...props }: { href: string; children: React.ReactNode; [key: string]: unknown }) => (
     <a href={href} {...props}>{children}</a>
   ),
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: mockRouterPush, replace: mockRouterReplace }),
   usePathname: () => "/",
 }));
 
