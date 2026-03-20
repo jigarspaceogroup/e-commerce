@@ -11,4 +11,13 @@ export const queryKeys = {
     list: (filters: ProductFilters) => ["products", "list", filters] as const,
     bySlug: (slug: string) => ["products", "slug", slug] as const,
   },
+  search: {
+    all: ["search"] as const,
+    results: (filters: Record<string, unknown>) => ["search", "results", filters] as const,
+    suggestions: (q: string) => ["search", "suggestions", q] as const,
+  },
+  cart: {
+    all: ["cart"] as const,
+    current: () => ["cart", "current"] as const,
+  },
 };
