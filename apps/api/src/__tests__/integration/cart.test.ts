@@ -188,10 +188,11 @@ describe("Cart API", () => {
 
   describe("POST /api/v1/cart/items", () => {
     it("adds item and returns updated cart", async () => {
-      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any); // getOrCreateCart
       vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce(sampleVariant as any);
       vi.mocked(prisma.cartItem.findUnique).mockResolvedValueOnce(null); // no existing item
       vi.mocked(prisma.cartItem.create).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any); // recalculateCart
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([
         {
           quantity: 1,
@@ -199,7 +200,7 @@ describe("Cart API", () => {
         },
       ] as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce(cartWithItems as any);
-      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(cartWithItems as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(cartWithItems as any); // getCartWithDetails
 
       const res = await request(app)
         .post("/api/v1/cart/items")
@@ -219,15 +220,16 @@ describe("Cart API", () => {
         quantity: 1,
       };
 
-      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any); // getOrCreateCart
       vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce(sampleVariant as any);
       vi.mocked(prisma.cartItem.findUnique).mockResolvedValueOnce(existingItem as any);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(emptyCart as any); // recalculateCart
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([
         { quantity: 2, variant: sampleVariant },
       ] as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce(cartWithItems as any);
-      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(cartWithItems as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce(cartWithItems as any); // getCartWithDetails
 
       const res = await request(app)
         .post("/api/v1/cart/items")

@@ -19,3 +19,11 @@ export async function removeCartItem(itemId: string) {
 export async function mergeCart() {
   return apiClient.post("/cart/merge");
 }
+
+export async function applyCoupon(code: string) {
+  return apiClient.post("/cart/coupon", { code });
+}
+
+export async function removeCoupon() {
+  return apiClient.del("/cart/coupon");
+}

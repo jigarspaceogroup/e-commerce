@@ -20,4 +20,9 @@ export const queryKeys = {
     all: ["cart"] as const,
     current: () => ["cart", "current"] as const,
   },
+  profile: {
+    all: ["profile"] as const,
+    me: () => ["profile", "me"] as const,
+    addresses: () => ["profile", "addresses"] as const,
+  },
 };

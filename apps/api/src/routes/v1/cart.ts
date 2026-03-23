@@ -11,6 +11,10 @@ import {
   removeItem,
   mergeCarts,
 } from "../../services/cart.js";
+import {
+  applyCoupon,
+  removeCoupon,
+} from "../../services/coupon.js";
 
 export const cartRouter: IRouter = Router();
 
@@ -21,6 +25,10 @@ const addItemSchema = z.object({
 
 const updateQuantitySchema = z.object({
   quantity: z.number().int().min(0).max(99),
+});
+
+const applyCouponSchema = z.object({
+  code: z.string().min(1).max(50),
 });
 
 // All cart routes use session middleware
@@ -70,6 +78,29 @@ cartRouter.delete("/items/:itemId", async (req, res, next) => {
     await removeItem(cart.id, req.params.itemId);
     const detailed = await getCartWithDetails(cart.id);
     res.json({ success: true, data: formatCartResponse(detailed) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/v1/cart/coupon
+cartRouter.post("/coupon", async (req, res, next) => {
+  try {
+    const { code } = applyCouponSchema.parse(req.body);
+    const cart = await getOrCreateCart(req.cartUserId, req.cartSessionId);
+    const data = await applyCoupon(cart.id, code, req.cartUserId);
+    res.json({ success: true, data });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// DELETE /api/v1/cart/coupon
+cartRouter.delete("/coupon", async (req, res, next) => {
+  try {
+    const cart = await getOrCreateCart(req.cartUserId, req.cartSessionId);
+    const data = await removeCoupon(cart.id);
+    res.json({ success: true, data });
   } catch (err) {
     next(err);
   }

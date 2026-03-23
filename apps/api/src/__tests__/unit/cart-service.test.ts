@@ -25,6 +25,11 @@ vi.mock("../../lib/prisma.js", () => ({
   },
 }));
 
+// Mock coupon service (imported by cart.ts)
+vi.mock("../../services/coupon.js", () => ({
+  calculateDiscount: vi.fn(),
+}));
+
 // Mock error handlers
 vi.mock("../../middleware/error-handler.js", () => ({
   badRequest: (msg: string) => Object.assign(new Error(msg), { statusCode: 400 }),
@@ -103,6 +108,7 @@ describe("Cart Service", () => {
       vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce(variant as any);
       vi.mocked(prisma.cartItem.findUnique).mockResolvedValueOnce(null as any);
       vi.mocked(prisma.cartItem.create).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -134,6 +140,7 @@ describe("Cart Service", () => {
       vi.mocked(prisma.productVariant.findUnique).mockResolvedValueOnce(variant as any);
       vi.mocked(prisma.cartItem.findUnique).mockResolvedValueOnce(existingItem as any);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -212,6 +219,7 @@ describe("Cart Service", () => {
           },
         },
       ];
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(items as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -235,6 +243,7 @@ describe("Cart Service", () => {
           },
         },
       ];
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(items as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -258,6 +267,7 @@ describe("Cart Service", () => {
           },
         },
       ];
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(items as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -281,6 +291,7 @@ describe("Cart Service", () => {
           },
         },
       ];
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(items as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -304,6 +315,7 @@ describe("Cart Service", () => {
           },
         },
       ];
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(items as any);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -326,6 +338,7 @@ describe("Cart Service", () => {
       const item = { id: "item-1", cartId: "cart-1" };
       vi.mocked(prisma.cartItem.findFirst).mockResolvedValueOnce(item as any);
       vi.mocked(prisma.cartItem.delete).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -355,6 +368,7 @@ describe("Cart Service", () => {
       };
       vi.mocked(prisma.cartItem.findFirst).mockResolvedValueOnce(item as any);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -373,6 +387,7 @@ describe("Cart Service", () => {
       const item = { id: "item-1", cartId: "cart-1" };
       vi.mocked(prisma.cartItem.findFirst).mockResolvedValueOnce(item as any);
       vi.mocked(prisma.cartItem.delete).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "cart-1", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -405,6 +420,7 @@ describe("Cart Service", () => {
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(userItems as any);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
       vi.mocked(prisma.cart.delete).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "user-cart", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -431,6 +447,7 @@ describe("Cart Service", () => {
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce(userItems as any);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
       vi.mocked(prisma.cart.delete).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "user-cart", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 
@@ -456,6 +473,7 @@ describe("Cart Service", () => {
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cartItem.update).mockResolvedValueOnce({} as any);
       vi.mocked(prisma.cart.delete).mockResolvedValueOnce({} as any);
+      vi.mocked(prisma.cart.findUnique).mockResolvedValueOnce({ id: "user-cart", couponCode: null } as any);
       vi.mocked(prisma.cartItem.findMany).mockResolvedValueOnce([]);
       vi.mocked(prisma.cart.update).mockResolvedValueOnce({} as any);
 

@@ -3,6 +3,7 @@ import { hashPassword, verifyPassword, invalidateAllUserSessions } from "./auth.
 import { getRedisClient } from "./redis.js";
 import { generateOtp } from "./otp.js";
 import crypto from "crypto";
+import type { Gender } from "../generated/prisma/client.js";
 
 export async function getProfile(userId: string) {
   return prisma.user.findUnique({
@@ -13,6 +14,8 @@ export async function getProfile(userId: string) {
       phone: true,
       firstName: true,
       lastName: true,
+      dateOfBirth: true,
+      gender: true,
       preferredLanguage: true,
       status: true,
       emailVerifiedAt: true,
@@ -26,7 +29,13 @@ export async function getProfile(userId: string) {
 
 export async function updateProfile(
   userId: string,
-  data: { firstName?: string; lastName?: string; preferredLanguage?: string },
+  data: {
+    firstName?: string;
+    lastName?: string;
+    preferredLanguage?: string;
+    dateOfBirth?: string | null;
+    gender?: Gender | null;
+  },
 ) {
   return prisma.user.update({
     where: { id: userId },
@@ -36,12 +45,18 @@ export async function updateProfile(
       ...(data.preferredLanguage !== undefined
         ? { preferredLanguage: data.preferredLanguage as "ar" | "en" }
         : {}),
+      ...(data.dateOfBirth !== undefined
+        ? { dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : null }
+        : {}),
+      ...(data.gender !== undefined ? { gender: data.gender } : {}),
     },
     select: {
       id: true,
       email: true,
       firstName: true,
       lastName: true,
+      dateOfBirth: true,
+      gender: true,
       preferredLanguage: true,
     },
   });

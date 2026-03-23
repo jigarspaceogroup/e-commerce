@@ -16,10 +16,14 @@ import {
   changePasswordSchema,
   changePhoneSchema,
 } from "../../schemas/user.js";
+import { addressRouter } from "./addresses.js";
 
 const usersRouter: IRouter = Router();
 
 usersRouter.use(authenticate);
+
+// ─── Address Book ───────────────────────────────────────────────────────────
+usersRouter.use("/me/addresses", addressRouter);
 
 // ─── GET /users/me ──────────────────────────────────────────────────────────
 usersRouter.get("/me", async (req: Request, res: Response) => {

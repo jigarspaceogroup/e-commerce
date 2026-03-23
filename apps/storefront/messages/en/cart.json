@@ -34,6 +34,19 @@
     "removeCoupon": "Remove",
     "invalidCoupon": "Invalid coupon code",
     "couponApplied": "Coupon applied: {code}",
+    "couponRemoved": "Coupon removed",
+    "couponPlaceholder": "Enter coupon code",
+    "couponError": {
+      "COUPON_NOT_FOUND": "Coupon code not found",
+      "COUPON_EXPIRED": "This coupon has expired",
+      "COUPON_USAGE_EXCEEDED": "This coupon has reached its usage limit",
+      "COUPON_MIN_ORDER_NOT_MET": "Minimum order amount of {amount} SAR required",
+      "COUPON_NOT_APPLICABLE": "This coupon does not apply to items in your cart",
+      "COUPON_ALREADY_APPLIED": "A coupon is already applied to your cart",
+      "AUTH_REQUIRED_FOR_COUPON": "Please sign in to use this coupon"
+    },
+    "freeShippingProgress": "Add {amount} SAR more for free shipping!",
+    "freeShippingUnlocked": "You've unlocked free shipping!",
     "vat": "VAT (15%)",
     "vatIncluded": "VAT included"
   }

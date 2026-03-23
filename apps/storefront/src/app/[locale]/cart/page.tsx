@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/components/shared/toast";
 import { CartItem } from "@/components/cart/cart-item";
 import { OrderSummary } from "@/components/cart/order-summary";
+import { CouponInput } from "@/components/cart/coupon-input";
 
 export default function CartPage() {
   const t = useTranslations("cart");
@@ -90,7 +91,8 @@ export default function CartPage() {
   const items = cart?.items ?? [];
   const subtotal = cart?.subtotal ?? 0;
   const taxAmount = cart?.taxAmount ?? 0;
-  const shippingCost = cart?.shippingCost ?? 0;
+  const shippingEstimate = cart?.shippingEstimate ?? 0;
+  const discountAmount = cart?.discountAmount ?? 0;
   const grandTotal = cart?.grandTotal ?? 0;
 
   return (
@@ -117,10 +119,11 @@ export default function CartPage() {
         <div className="lg:flex-1">
           <OrderSummary
             subtotal={subtotal}
-            discount={0}
-            deliveryFee={shippingCost}
+            discount={discountAmount}
+            deliveryFee={shippingEstimate}
             taxAmount={taxAmount}
             grandTotal={grandTotal}
+            couponSlot={<CouponInput />}
           />
         </div>
       </div>
