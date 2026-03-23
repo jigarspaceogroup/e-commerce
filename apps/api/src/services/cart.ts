@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 import { badRequest, notFound } from "../middleware/error-handler.js";
+import { calculateDiscount } from "./coupon.js";
 
 // ─── Get or Create ──────────────────────────────────────────────────────────
 
@@ -76,6 +77,7 @@ export function formatCartResponse(cart: Awaited<ReturnType<typeof getCartWithDe
 
   return {
     id: cart.id,
+    couponCode: cart.couponCode ?? null,
     items,
     subtotal: Number(cart.subtotal),
     taxAmount: Number(cart.taxAmount),
@@ -167,6 +169,9 @@ export async function removeItem(cartId: string, itemId: string) {
 // ─── Recalculate Cart ───────────────────────────────────────────────────────
 
 export async function recalculateCart(cartId: string) {
+  const cart = await prisma.cart.findUnique({ where: { id: cartId } });
+  if (!cart) throw notFound("Cart not found");
+
   const items = await prisma.cartItem.findMany({
     where: { cartId },
     include: {
@@ -182,9 +187,32 @@ export async function recalculateCart(cartId: string) {
     subtotal += effectivePrice * item.quantity;
   }
 
-  const taxAmount = subtotal * 0.15;
-  const shippingEstimate = subtotal >= 500 ? 0 : 30;
-  const discountAmount = 0; // placeholder for coupon system
+  // Calculate coupon discount if a coupon is applied
+  let discountAmount = 0;
+  let freeShipping = false;
+
+  if (cart.couponCode) {
+    const promotion = await prisma.promotion.findFirst({
+      where: { couponCode: { equals: cart.couponCode, mode: "insensitive" } },
+    });
+
+    if (promotion && promotion.isActive) {
+      const result = calculateDiscount(promotion, subtotal);
+      discountAmount = result.discountAmount;
+      freeShipping = result.freeShipping;
+    } else {
+      // Coupon no longer valid — clear it from the cart
+      await prisma.cart.update({
+        where: { id: cartId },
+        data: { couponCode: null },
+      });
+    }
+  }
+
+  const taxableAmount = subtotal - discountAmount;
+  const taxAmount = taxableAmount > 0 ? taxableAmount * 0.15 : 0;
+  const baseShipping = subtotal >= 500 ? 0 : 30;
+  const shippingEstimate = freeShipping ? 0 : baseShipping;
   const grandTotal = subtotal + taxAmount + shippingEstimate - discountAmount;
 
   await prisma.cart.update({
