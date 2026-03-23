@@ -34,6 +34,19 @@
     "removeCoupon": "إزالة",
     "invalidCoupon": "كود الخصم غير صالح",
     "couponApplied": "تم تطبيق كود الخصم: {code}",
+    "couponRemoved": "تمت إزالة كود الخصم",
+    "couponPlaceholder": "أدخل كود الخصم",
+    "couponError": {
+      "COUPON_NOT_FOUND": "كود الخصم غير موجود",
+      "COUPON_EXPIRED": "انتهت صلاحية كود الخصم",
+      "COUPON_USAGE_EXCEEDED": "تم استنفاد عدد مرات استخدام كود الخصم",
+      "COUPON_MIN_ORDER_NOT_MET": "الحد الأدنى للطلب {amount} ريال سعودي",
+      "COUPON_NOT_APPLICABLE": "كود الخصم لا ينطبق على المنتجات في سلتك",
+      "COUPON_ALREADY_APPLIED": "تم تطبيق كود خصم على سلتك بالفعل",
+      "AUTH_REQUIRED_FOR_COUPON": "يرجى تسجيل الدخول لاستخدام كود الخصم"
+    },
+    "freeShippingProgress": "أضف {amount} ريال سعودي للحصول على شحن مجاني!",
+    "freeShippingUnlocked": "حصلت على شحن مجاني!",
     "vat": "ضريبة القيمة المضافة (15%)",
     "vatIncluded": "شامل ضريبة القيمة المضافة"
   }
