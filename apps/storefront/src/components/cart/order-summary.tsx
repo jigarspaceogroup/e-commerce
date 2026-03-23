@@ -1,9 +1,8 @@
 "use client";
 
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tag } from "lucide-react";
 
 interface OrderSummaryProps {
   subtotal: number;
@@ -12,9 +11,10 @@ interface OrderSummaryProps {
   taxAmount: number;
   grandTotal: number;
   currency?: string;
+  couponSlot?: ReactNode;
 }
 
-export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grandTotal, currency = "SAR" }: OrderSummaryProps) {
+export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grandTotal, currency = "SAR", couponSlot }: OrderSummaryProps) {
   const t = useTranslations("cart");
 
   return (
@@ -49,10 +49,7 @@ export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grand
           <span className="text-body-xl font-bold text-primary">{currency} {grandTotal.toFixed(2)}</span>
         </div>
       </div>
-      <div className="mt-5 flex gap-3">
-        <Input icon={<Tag size={18} />} placeholder={t("couponCode")} />
-        <Button size="small">{t("applyCoupon")}</Button>
-      </div>
+      {couponSlot && <div className="mt-5">{couponSlot}</div>}
       <div className="mt-5">
         <Button size="full">{t("checkout")}</Button>
       </div>
