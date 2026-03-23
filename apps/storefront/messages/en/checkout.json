@@ -3,9 +3,36 @@
     "title": "Checkout",
     "steps": {
       "shipping": "Shipping",
+      "shippingMethod": "Shipping Method",
       "payment": "Payment",
       "review": "Review",
       "confirmation": "Confirmation"
+    },
+    "guest": {
+      "checkoutAsGuest": "Checkout as Guest",
+      "loginOrRegister": "Log In / Create Account",
+      "guestModalTitle": "How would you like to checkout?",
+      "guestModalDescription": "You can checkout as a guest or log in for a faster experience.",
+      "guestInfo": "Guest Information",
+      "saveToAddressBook": "Save to my address book",
+      "selectAddress": "Select a delivery address"
+    },
+    "errors": {
+      "cartEmpty": "Your cart is empty",
+      "stockInsufficient": "Some items are no longer available in the requested quantity",
+      "priceChanged": "Prices have changed. Please review your cart.",
+      "paymentFailed": "Payment failed. Please try again.",
+      "paymentDeclined": "Your card was declined. Please try another card.",
+      "sessionExpired": "Your checkout session has expired",
+      "orderNotFound": "Order not found"
+    },
+    "status": {
+      "pendingPayment": "Pending Payment",
+      "paymentConfirmed": "Payment Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
     },
     "shipping": {
       "title": "Shipping Address",
@@ -32,7 +59,10 @@
       "sameDay": "Same Day Delivery",
       "standardDelivery": "Delivered in {min}–{max} business days",
       "expressDelivery": "Delivered in {min}–{max} business days",
-      "sameDayDelivery": "Delivered today before {time}"
+      "sameDayDelivery": "Delivered today before {time}",
+      "freeShipping": "Free",
+      "businessDays": "business days",
+      "estimatedDelivery": "Estimated Delivery: {days}"
     },
     "payment": {
       "title": "Payment Method",
@@ -51,7 +81,8 @@
       "cashOnDelivery": "Cash on Delivery",
       "codFee": "Cash on delivery fee: {fee}",
       "saveCard": "Save this card for future purchases",
-      "securePayment": "Your payment information is encrypted and secure."
+      "securePayment": "Your payment information is encrypted and secure.",
+      "acceptedCards": "Accepted Cards"
     },
     "review": {
       "title": "Review Your Order",
@@ -66,7 +97,8 @@
       "total": "Total",
       "placeOrder": "Place Order",
       "agreeTerms": "By placing this order, you agree to our {terms} and {privacy}.",
-      "itemCount": "{count} {count, plural, one {item} other {items}}"
+      "itemCount": "{count} {count, plural, one {item} other {items}}",
+      "processing": "Processing your order..."
     },
     "confirmation": {
       "title": "Order Confirmed!",
@@ -76,7 +108,10 @@
       "estimatedDelivery": "Estimated Delivery: {date}",
       "trackOrder": "Track Order",
       "continueShopping": "Continue Shopping",
-      "orderDetails": "View Order Details"
+      "orderDetails": "View Order Details",
+      "paymentProcessing": "Payment is being processed...",
+      "createAccount": "Create an Account",
+      "estimatedDeliveryLabel": "Estimated Delivery"
     }
   }
 }

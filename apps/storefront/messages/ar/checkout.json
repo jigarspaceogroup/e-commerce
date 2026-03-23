@@ -3,9 +3,36 @@
     "title": "إتمام الشراء",
     "steps": {
       "shipping": "الشحن",
+      "shippingMethod": "طريقة الشحن",
       "payment": "الدفع",
       "review": "المراجعة",
       "confirmation": "التأكيد"
+    },
+    "guest": {
+      "checkoutAsGuest": "متابعة كضيف",
+      "loginOrRegister": "تسجيل الدخول / إنشاء حساب",
+      "guestModalTitle": "كيف تريد إتمام الطلب؟",
+      "guestModalDescription": "يمكنك المتابعة كضيف أو تسجيل الدخول لتجربة أسرع",
+      "guestInfo": "معلومات الضيف",
+      "saveToAddressBook": "حفظ في دفتر العناوين",
+      "selectAddress": "اختر عنوان التوصيل"
+    },
+    "errors": {
+      "cartEmpty": "سلة التسوق فارغة",
+      "stockInsufficient": "بعض المنتجات لم تعد متوفرة بالكمية المطلوبة",
+      "priceChanged": "تغيرت الأسعار. يرجى مراجعة سلتك.",
+      "paymentFailed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+      "paymentDeclined": "تم رفض بطاقتك. يرجى تجربة بطاقة أخرى.",
+      "sessionExpired": "انتهت صلاحية جلسة الدفع",
+      "orderNotFound": "الطلب غير موجود"
+    },
+    "status": {
+      "pendingPayment": "في انتظار الدفع",
+      "paymentConfirmed": "تم تأكيد الدفع",
+      "processing": "قيد المعالجة",
+      "shipped": "تم الشحن",
+      "delivered": "تم التوصيل",
+      "cancelled": "ملغي"
     },
     "shipping": {
       "title": "عنوان الشحن",
@@ -32,7 +59,10 @@
       "sameDay": "توصيل في نفس اليوم",
       "standardDelivery": "التوصيل خلال {min}–{max} أيام عمل",
       "expressDelivery": "التوصيل خلال {min}–{max} أيام عمل",
-      "sameDayDelivery": "التوصيل اليوم قبل الساعة {time}"
+      "sameDayDelivery": "التوصيل اليوم قبل الساعة {time}",
+      "freeShipping": "مجاني",
+      "businessDays": "أيام عمل",
+      "estimatedDelivery": "التوصيل المتوقع: {days}"
     },
     "payment": {
       "title": "طريقة الدفع",
@@ -51,7 +81,8 @@
       "cashOnDelivery": "الدفع عند الاستلام",
       "codFee": "رسوم الدفع عند الاستلام: {fee}",
       "saveCard": "حفظ البطاقة للمشتريات المستقبلية",
-      "securePayment": "معلومات الدفع مشفرة وآمنة."
+      "securePayment": "معلومات الدفع مشفرة وآمنة.",
+      "acceptedCards": "البطاقات المقبولة"
     },
     "review": {
       "title": "مراجعة طلبك",
@@ -66,7 +97,8 @@
       "total": "الإجمالي",
       "placeOrder": "تأكيد الطلب",
       "agreeTerms": "بتأكيد الطلب، أنت توافق على {terms} و{privacy}.",
-      "itemCount": "{count} {count, plural, one {منتج} two {منتجان} few {منتجات} other {منتج}}"
+      "itemCount": "{count} {count, plural, one {منتج} two {منتجان} few {منتجات} other {منتج}}",
+      "processing": "جارٍ معالجة طلبك..."
     },
     "confirmation": {
       "title": "تم تأكيد الطلب!",
@@ -76,7 +108,10 @@
       "estimatedDelivery": "التوصيل المتوقع: {date}",
       "trackOrder": "تتبع الطلب",
       "continueShopping": "متابعة التسوق",
-      "orderDetails": "عرض تفاصيل الطلب"
+      "orderDetails": "عرض تفاصيل الطلب",
+      "paymentProcessing": "جارٍ معالجة الدفع...",
+      "createAccount": "إنشاء حساب",
+      "estimatedDeliveryLabel": "التوصيل المتوقع"
     }
   }
 }
