@@ -3,7 +3,7 @@ import { hashPassword, verifyPassword, invalidateAllUserSessions } from "./auth.
 import { getRedisClient } from "./redis.js";
 import { generateOtp } from "./otp.js";
 import crypto from "crypto";
-import type { Gender } from "@prisma/client";
+import type { Gender } from "../generated/prisma/client.js";
 
 export async function getProfile(userId: string) {
   return prisma.user.findUnique({
