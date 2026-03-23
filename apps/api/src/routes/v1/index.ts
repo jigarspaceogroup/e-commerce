@@ -13,6 +13,9 @@ import { publicProductRouter } from "./products.js";
 import { searchRouter } from "./search.js";
 import { oauthRouter } from "../oauth.js";
 import { cartRouter } from "./cart.js";
+import { checkoutRouter } from "./checkout.js";
+import { ordersRouter } from "./orders.js";
+import { paymentsRouter } from "./payments.js";
 
 const v1Router: IRouter = Router();
 
@@ -30,5 +33,8 @@ v1Router.use("/categories", publicCategoryRouter);
 v1Router.use("/products", publicProductRouter);
 v1Router.use("/search", searchRouter);
 v1Router.use("/cart", cartRouter);
+v1Router.use("/checkout", checkoutRouter);
+v1Router.use("/orders", ordersRouter);
+v1Router.use("/payments", paymentsRouter);
 
 export { v1Router };
