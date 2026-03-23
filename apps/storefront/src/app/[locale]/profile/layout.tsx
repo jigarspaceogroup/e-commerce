@@ -2,7 +2,7 @@
 
 import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname, redirect } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { User, MapPin, Package, Heart, Settings } from "lucide-react";
 
@@ -16,10 +16,12 @@ const sidebarLinks = [
 export default function ProfileLayout({ children }: { children: ReactNode }) {
   const t = useTranslations("profile");
   const pathname = usePathname();
+  const router = useRouter();
   const { user, isAuthenticated, isLoading } = useAuth();
 
   if (!isLoading && !isAuthenticated) {
-    redirect("/auth/login");
+    router.replace("/auth/login");
+    return null;
   }
 
   if (isLoading) {

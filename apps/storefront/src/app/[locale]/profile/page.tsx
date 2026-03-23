@@ -39,7 +39,7 @@ export default function ProfilePage() {
       setFirstName(profile.firstName ?? "");
       setLastName(profile.lastName ?? "");
       setDateOfBirth(
-        profile.dateOfBirth ? profile.dateOfBirth.split("T")[0] : ""
+        profile.dateOfBirth ? (profile.dateOfBirth.split("T")[0] ?? "") : ""
       );
       setGender(profile.gender ?? "");
     }
