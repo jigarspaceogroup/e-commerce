@@ -12,6 +12,7 @@ import { CheckoutSummary } from "./components/checkout-summary";
 import { StepAddress } from "./components/step-address";
 import { StepShipping } from "./components/step-shipping";
 import { StepPayment } from "./components/step-payment";
+import { StepReview } from "./components/step-review";
 
 interface ShippingOption {
   id: string;
@@ -222,14 +223,7 @@ export default function CheckoutPage() {
 
             {/* Step 4: Review */}
             {state.step === 4 && (
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="font-heading text-heading-md font-bold text-primary mb-4">
-                  {t("review.title")}
-                </h2>
-                <p className="text-body-md text-muted">
-                  Order review will be implemented in Task 12
-                </p>
-              </div>
+              <StepReview state={state} dispatch={dispatch} isGuest={isGuest} />
             )}
           </div>
 
