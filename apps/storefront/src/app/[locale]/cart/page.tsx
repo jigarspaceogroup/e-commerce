@@ -1,19 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/components/shared/toast";
 import { CartItem } from "@/components/cart/cart-item";
 import { OrderSummary } from "@/components/cart/order-summary";
 import { CouponInput } from "@/components/cart/coupon-input";
+import { GuestCheckoutModal } from "@/app/[locale]/checkout/components/guest-checkout-modal";
 
 export default function CartPage() {
   const t = useTranslations("cart");
   const { cart, isLoading, itemCount, updateQuantity, removeItem, addItem } = useCart();
+  const { user } = useAuth();
+  const router = useRouter();
   const { showToast } = useToast();
+  const [showGuestModal, setShowGuestModal] = useState(false);
 
   const handleRemove = async (itemId: string) => {
     const removedItem = cart?.items.find((i: any) => i.id === itemId);
@@ -88,6 +94,14 @@ export default function CartPage() {
     );
   }
 
+  const handleCheckout = () => {
+    if (user) {
+      router.push("/checkout");
+    } else {
+      setShowGuestModal(true);
+    }
+  };
+
   const items = cart?.items ?? [];
   const subtotal = cart?.subtotal ?? 0;
   const taxAmount = cart?.taxAmount ?? 0;
@@ -124,9 +138,14 @@ export default function CartPage() {
             taxAmount={taxAmount}
             grandTotal={grandTotal}
             couponSlot={<CouponInput />}
+            onCheckout={handleCheckout}
           />
         </div>
       </div>
+      <GuestCheckoutModal
+        open={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
     </div>
   );
 }
