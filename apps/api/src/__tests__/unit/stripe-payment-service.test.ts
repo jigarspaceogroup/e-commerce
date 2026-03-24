@@ -6,7 +6,6 @@ import {
   handleWebhookEvent,
   mapStripeError,
 } from "../../services/stripe-payment.js";
-import Stripe from "stripe";
 
 // Mock Stripe
 const mockPaymentIntentsCreate = vi.fn();

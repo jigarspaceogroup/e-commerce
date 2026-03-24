@@ -46,7 +46,7 @@ export async function listOrders(
 
   const hasMore = orders.length > limit;
   const data = hasMore ? orders.slice(0, limit) : orders;
-  const nextCursor = hasMore ? data[data.length - 1].id : null;
+  const nextCursor = hasMore ? data[data.length - 1]?.id : null;
 
   return { data, nextCursor };
 }

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { prisma } from "../lib/prisma.js";
-import { AppError, badRequest, notFound, conflict } from "../middleware/error-handler.js";
+import { AppError, badRequest } from "../middleware/error-handler.js";
 import { getRedisClient } from "./redis.js";
 import { getAddress } from "./address.js";
 
@@ -153,8 +153,8 @@ export async function createOrder(
         shippingFee: cart.shippingEstimate,
         grandTotal: cart.grandTotal,
         currency: "SAR",
-        shippingAddress: addressSnapshot,
-        billingAddress: null,
+        shippingAddress: addressSnapshot as any,
+        billingAddress: null as any,
         couponCodeUsed: cart.couponCode ?? null,
         idempotencyKey: input.idempotencyKey,
       },

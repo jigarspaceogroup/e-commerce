@@ -1,8 +1,8 @@
 import Stripe from "stripe";
 import { prisma } from "../lib/prisma.js";
-import { AppError, notFound, unauthorized } from "../middleware/error-handler.js";
+import { notFound, unauthorized } from "../middleware/error-handler.js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "sk_test_placeholder");
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
 
 const STRIPE_ERROR_MAP: Record<string, string> = {
   card_declined: "Your card was declined. Please try another card.",

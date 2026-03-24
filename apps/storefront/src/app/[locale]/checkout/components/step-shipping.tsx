@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,6 @@ interface StepShippingProps {
 
 export function StepShipping({ dispatch, cartSubtotal }: StepShippingProps) {
   const t = useTranslations("checkout.shipping");
-  const [selectedMethod] = useState<string>("standard");
 
   const isFree = cartSubtotal >= 500;
   const shippingCost = isFree ? 0 : 30;

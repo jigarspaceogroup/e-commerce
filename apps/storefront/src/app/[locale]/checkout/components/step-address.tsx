@@ -13,7 +13,6 @@ import { queryKeys } from "@/lib/query-keys";
 import {
   fetchAddresses,
   createAddress,
-  type Address,
   type AddressInput,
 } from "@/lib/api/addresses";
 
@@ -77,9 +76,12 @@ export function StepAddress({ dispatch, isGuest }: StepAddressProps) {
 
   // Set default address on mount
   useState(() => {
-    if (!isGuest && addresses.length > 0 && !selectedAddressId) {
-      const defaultAddr = addresses.find((a) => a.isDefault) ?? addresses[0];
-      setSelectedAddressId(defaultAddr.id);
+    const addressesData = Array.isArray(addresses) ? addresses : [];
+    if (!isGuest && addressesData.length > 0 && !selectedAddressId) {
+      const defaultAddr: any = addressesData.find((a: any) => a.isDefault) ?? addressesData[0];
+      if (defaultAddr) {
+        setSelectedAddressId(defaultAddr.id);
+      }
     }
   });
 
@@ -135,21 +137,22 @@ export function StepAddress({ dispatch, isGuest }: StepAddressProps) {
       dispatch({
         type: "SET_ADDRESS",
         payload: {
-          address: guestAddress as Record<string, unknown>,
+          address: guestAddress as unknown as Record<string, unknown>,
           isNew: true,
           save: false,
         },
       });
     } else {
       // Authenticated user
-      const selected = addresses.find((a) => a.id === selectedAddressId);
+      const addressesData = Array.isArray(addresses) ? addresses : [];
+      const selected = addressesData.find((a: any) => a.id === selectedAddressId);
       if (!selected) return;
 
       dispatch({
         type: "SET_ADDRESS",
         payload: {
           address: selected as Record<string, unknown>,
-          addressId: selected.id,
+          addressId: (selected as any).id,
           isNew: false,
           save: false,
         },
@@ -274,7 +277,7 @@ export function StepAddress({ dispatch, isGuest }: StepAddressProps) {
 
           {/* Saved addresses */}
           <div className="space-y-3">
-            {addresses.map((address) => (
+            {(Array.isArray(addresses) ? addresses : []).map((address: any) => (
               <button
                 key={address.id}
                 onClick={() => handleAddressSelect(address.id)}

@@ -27,8 +27,8 @@ ordersRouter.get("/", authenticate, async (req, res, next) => {
 ordersRouter.get("/:id", cartSession, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { email } = req.query;
-    const order = await getOrder(id, req.cartUserId, email as string | undefined);
+    const email = req.query.email as string | undefined;
+    const order = await getOrder(id as string, req.cartUserId, email);
     res.json({ success: true, data: order });
   } catch (err) {
     next(err);

@@ -88,10 +88,11 @@ export function StepReview({ state, dispatch, isGuest }: StepReviewProps) {
       const orderResponse = await createOrder(orderData as any);
 
       if (!orderResponse.success) {
-        throw new Error(orderResponse.error || "Failed to create order");
+        throw new Error(String(orderResponse.error || "Failed to create order"));
       }
 
-      const orderId = orderResponse.data.id;
+      const orderResponseData = orderResponse.data as any;
+      const orderId = orderResponseData.id;
 
       // Invalidate cart cache immediately after order creation
       await queryClient.invalidateQueries({ queryKey: queryKeys.cart.all });
@@ -103,10 +104,11 @@ export function StepReview({ state, dispatch, isGuest }: StepReviewProps) {
       });
 
       if (!paymentResponse.success) {
-        throw new Error(paymentResponse.error || "Failed to initiate payment");
+        throw new Error(String(paymentResponse.error || "Failed to initiate payment"));
       }
 
-      const clientSecret = paymentResponse.data.clientSecret;
+      const paymentResponseData = paymentResponse.data as any;
+      const clientSecret = paymentResponseData.clientSecret;
 
       // Step 3: Confirm card payment
       const cardElement = elements.getElement(CardElement);
@@ -140,8 +142,9 @@ export function StepReview({ state, dispatch, isGuest }: StepReviewProps) {
         await new Promise((resolve) => setTimeout(resolve, pollInterval));
 
         const statusResponse = await getPaymentStatus(paymentIntent.id);
+        const statusResponseData = statusResponse.data as any;
 
-        if (statusResponse.success && statusResponse.data.status === "succeeded") {
+        if (statusResponse.success && statusResponseData.status === "succeeded") {
           // Payment confirmed, redirect to confirmation
           const confirmationUrl = isGuest
             ? `/order-confirmation/${orderId}?email=${encodeURIComponent(state.guestEmail || "")}`
@@ -253,7 +256,7 @@ export function StepReview({ state, dispatch, isGuest }: StepReviewProps) {
         {state.shippingAddress && (
           <div className="text-body-sm text-primary-muted">
             <p>{formatAddress(state.shippingAddress)}</p>
-            <p className="mt-1">{state.shippingAddress.phone}</p>
+            <p className="mt-1">{state.shippingAddress.phone as string}</p>
             {isGuest && state.guestEmail && (
               <p className="mt-1">{state.guestEmail}</p>
             )}
@@ -282,8 +285,8 @@ export function StepReview({ state, dispatch, isGuest }: StepReviewProps) {
             </p>
             <p>
               {tShipping("standardDelivery", {
-                min: state.shippingMethod.estimatedDays.split("-")[0],
-                max: state.shippingMethod.estimatedDays.split("-")[1],
+                min: state.shippingMethod.estimatedDays.split("-")[0] || "3",
+                max: state.shippingMethod.estimatedDays.split("-")[1] || "5",
               })}
             </p>
             <p className="font-bold text-primary mt-1">

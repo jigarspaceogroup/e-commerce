@@ -194,6 +194,7 @@ describe("Checkout Service", () => {
     const validInput = {
       shippingAddressId: ADDRESS_ID,
       idempotencyKey: "idem-key-1",
+      saveAddress: false,
     };
 
     it("creates order with items, snapshots, and status history", async () => {
@@ -261,8 +262,8 @@ describe("Checkout Service", () => {
       const result = await createOrder(CART_ID, USER_ID, validInput);
 
       expect(result).toBeDefined();
-      expect(result.orderNumber).toMatch(/^ORD-\d{8}-\d{5}$/);
-      expect(result.items).toHaveLength(1);
+      expect(result!.orderNumber).toMatch(/^ORD-\d{8}-\d{5}$/);
+      expect(result!.items).toHaveLength(1);
       expect(prisma.order.create).toHaveBeenCalledWith({
         data: expect.objectContaining({
           orderNumber: expect.any(String),
@@ -388,6 +389,7 @@ describe("Checkout Service", () => {
         },
         guestEmail: "guest@example.com",
         idempotencyKey: "idem-key-guest",
+        saveAddress: false,
       };
 
       const guestCart = {
@@ -442,8 +444,8 @@ describe("Checkout Service", () => {
       const result = await createOrder(CART_ID, undefined, guestInput);
 
       expect(result).toBeDefined();
-      expect(result.userId).toBeNull();
-      expect(result.guestEmail).toBe("guest@example.com");
+      expect(result!.userId).toBeNull();
+      expect(result!.guestEmail).toBe("guest@example.com");
       expect((result as any).oneClickRegisterUrl).toContain("/auth/register?");
       expect((result as any).oneClickRegisterUrl).toContain("email=guest%40example.com");
       expect((result as any).oneClickRegisterUrl).toContain("name=Guest+User");

@@ -42,7 +42,7 @@ paymentsRouter.post("/initiate", cartSession, async (req, res, next) => {
 paymentsRouter.get("/:id/status", cartSession, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await getPaymentStatus(id, req.cartUserId);
+    const result = await getPaymentStatus(id as string, req.cartUserId);
     res.json({ success: true, data: result });
   } catch (err) {
     next(err);
@@ -50,7 +50,7 @@ paymentsRouter.get("/:id/status", cartSession, async (req, res, next) => {
 });
 
 // GET /api/v1/payments/methods — public endpoint
-paymentsRouter.get("/methods", (req, res) => {
+paymentsRouter.get("/methods", (_req, res) => {
   res.json({ success: true, data: ["credit_card"] });
 });
 
@@ -61,14 +61,14 @@ paymentsRouter.post(
   express.raw({ type: "application/json" }),
   async (req: Request, res: Response) => {
     try {
-      const signature = req.headers["stripe-signature"];
+      const signature = req.headers["stripe-signature"] as string;
       if (!signature) {
         res.status(400).json({ success: false, error: "Missing stripe-signature header" });
         return;
       }
 
       const rawBody = req.body as Buffer;
-      const result = await handleWebhookEvent(rawBody, signature as string);
+      const result = await handleWebhookEvent(rawBody, signature);
       res.json(result);
     } catch (err) {
       console.error("Webhook error:", err);

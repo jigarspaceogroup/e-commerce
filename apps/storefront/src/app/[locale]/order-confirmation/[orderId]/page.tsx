@@ -27,8 +27,9 @@ export default function OrderConfirmationPage() {
 
   // Poll payment status if pending
   const [pollCount, setPollCount] = useState(0);
-  const isPending = order?.data?.status === "pending_payment";
-  const paymentId = order?.data?.payments?.[0]?.id;
+  const orderDataTemp = order?.data as any;
+  const isPending = orderDataTemp?.status === "pending_payment";
+  const paymentId = orderDataTemp?.payments?.[0]?.id;
 
   const { data: paymentData } = useQuery({
     queryKey: queryKeys.payments.status(paymentId ?? ""),
@@ -41,7 +42,8 @@ export default function OrderConfirmationPage() {
     if (isPending && paymentId) setPollCount((c) => c + 1);
   }, [paymentData, isPending, paymentId]);
 
-  const isConfirmed = !isPending || paymentData?.data?.status === "captured";
+  const paymentDataTemp = paymentData?.data as any;
+  const isConfirmed = !isPending || paymentDataTemp?.status === "captured";
   const isGuest = !user;
 
   if (isLoading) {
@@ -60,7 +62,7 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  const orderData = order.data;
+  const orderData = order.data as any;
 
   return (
     <div className="container mx-auto max-w-2xl px-4 py-12 text-center">
