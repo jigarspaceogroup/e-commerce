@@ -34,6 +34,8 @@
     },
     "status": {
       "pending": "Pending",
+      "pendingPayment": "Pending Payment",
+      "paymentConfirmed": "Payment Confirmed",
       "confirmed": "Confirmed",
       "processing": "Processing",
       "shipped": "Shipped",

@@ -25,4 +25,13 @@ export const queryKeys = {
     me: () => ["profile", "me"] as const,
     addresses: () => ["profile", "addresses"] as const,
   },
+  orders: {
+    all: ["orders"] as const,
+    list: (params: Record<string, unknown>) => ["orders", "list", params] as const,
+    detail: (id: string) => ["orders", id] as const,
+  },
+  payments: {
+    status: (id: string) => ["payments", id, "status"] as const,
+    methods: ["payments", "methods"] as const,
+  },
 };

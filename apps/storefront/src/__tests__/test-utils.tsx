@@ -9,8 +9,12 @@ import arMessages from "../../messages/ar.json";
 // Import modular message files that aren't included in the flat base files
 import enProfile from "../../messages/en/profile.json";
 import enCart from "../../messages/en/cart.json";
+import enCheckout from "../../messages/en/checkout.json";
+import enOrder from "../../messages/en/order.json";
 import arProfile from "../../messages/ar/profile.json";
 import arCart from "../../messages/ar/cart.json";
+import arCheckout from "../../messages/ar/checkout.json";
+import arOrder from "../../messages/ar/order.json";
 
 // Deep merge: source keys take precedence over target keys
 function deepMerge(target: Record<string, any>, source: Record<string, any>): Record<string, any> {
@@ -29,8 +33,8 @@ function deepMerge(target: Record<string, any>, source: Record<string, any>): Re
 // This ensures flat file values (used by existing tests) take precedence,
 // while new keys from modular files (profile, extended cart) are available.
 const messages: Record<string, Record<string, unknown>> = {
-  en: deepMerge(deepMerge(enProfile, enCart), enMessages),
-  ar: deepMerge(deepMerge(arProfile, arCart), arMessages),
+  en: deepMerge(deepMerge(deepMerge(deepMerge(enProfile, enCart), enCheckout), enOrder), enMessages),
+  ar: deepMerge(deepMerge(deepMerge(deepMerge(arProfile, arCart), arCheckout), arOrder), arMessages),
 };
 
 // Stable router mocks — import these in tests that need to assert on router.push/replace

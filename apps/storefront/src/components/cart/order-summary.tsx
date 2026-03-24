@@ -12,9 +12,10 @@ interface OrderSummaryProps {
   grandTotal: number;
   currency?: string;
   couponSlot?: ReactNode;
+  onCheckout?: () => void;
 }
 
-export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grandTotal, currency = "SAR", couponSlot }: OrderSummaryProps) {
+export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grandTotal, currency = "SAR", couponSlot, onCheckout }: OrderSummaryProps) {
   const t = useTranslations("cart");
 
   return (
@@ -51,7 +52,7 @@ export function OrderSummary({ subtotal, discount, deliveryFee, taxAmount, grand
       </div>
       {couponSlot && <div className="mt-5">{couponSlot}</div>}
       <div className="mt-5">
-        <Button size="full">{t("checkout")}</Button>
+        <Button size="full" onClick={onCheckout}>{t("checkout")}</Button>
       </div>
     </div>
   );

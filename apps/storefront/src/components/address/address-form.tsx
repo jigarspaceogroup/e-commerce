@@ -28,6 +28,7 @@ interface AddressFormProps {
   onSubmit: (data: AddressInput) => Promise<void>;
   onCancel: () => void;
   isSubmitting?: boolean;
+  translationNamespace?: string;
 }
 
 export function AddressForm({
@@ -35,8 +36,9 @@ export function AddressForm({
   onSubmit,
   onCancel,
   isSubmitting,
+  translationNamespace,
 }: AddressFormProps) {
-  const t = useTranslations("profile.addresses");
+  const t = useTranslations(translationNamespace ?? "profile.addresses");
 
   const [label, setLabel] = useState(initialValues?.label ?? "home");
   const [recipientName, setRecipientName] = useState(

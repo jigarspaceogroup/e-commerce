@@ -299,21 +299,23 @@ model Order {
   grandTotal            Decimal     @map("grand_total") @db.Decimal(10, 2)
   currency              String      @default("SAR")
   shippingAddress       Json        @map("shipping_address")
-  billingAddress        Json        @map("billing_address")
+  billingAddress        Json?       @map("billing_address")
   couponCodeUsed        String?     @map("coupon_code_used")
   notes                 String?     @db.Text
   trackingNumber        String?     @map("tracking_number")
   trackingUrl           String?     @map("tracking_url")
   estimatedDeliveryDate DateTime?   @map("estimated_delivery_date")
   slaDeadline           DateTime?   @map("sla_deadline")
+  idempotencyKey        String?     @unique @map("idempotency_key")
   createdAt             DateTime    @default(now()) @map("created_at")
   updatedAt             DateTime    @updatedAt @map("updated_at")
 
-  user     User?      @relation(fields: [userId], references: [id])
-  items    OrderItem[]
-  payments Payment[]
-  refunds  Refund[]
-  tickets  SupportTicket[]
+  user          User?                 @relation(fields: [userId], references: [id])
+  items         OrderItem[]
+  payments      Payment[]
+  refunds       Refund[]
+  tickets       SupportTicket[]
+  statusHistory OrderStatusHistory[]
 
   @@index([userId])
   @@index([orderNumber])
@@ -322,11 +324,26 @@ model Order {
   @@map("orders")
 }
 
+model OrderStatusHistory {
+  id         String       @id @default(uuid()) @db.Uuid
+  orderId    String       @map("order_id") @db.Uuid
+  fromStatus OrderStatus? @map("from_status")
+  toStatus   OrderStatus  @map("to_status")
+  changedBy  String?      @map("changed_by") @db.Uuid
+  notes      String?
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("order_status_history")
+}
+
 model OrderItem {
   id                        String          @id @default(uuid()) @db.Uuid
   orderId                   String          @map("order_id") @db.Uuid
   productVariantId          String          @map("product_variant_id") @db.Uuid
-  productTitleSnapshot      String          @map("product_title_snapshot")
+  productTitleSnapshot      Json            @map("product_title_snapshot")
   variantAttributesSnapshot Json?           @map("variant_attributes_snapshot")
   skuSnapshot               String          @map("sku_snapshot")
   unitPrice                 Decimal         @map("unit_price") @db.Decimal(10, 2)
@@ -369,11 +386,12 @@ model Payment {
 }
 
 model PaymentEvent {
-  id        String   @id @default(uuid()) @db.Uuid
-  paymentId String   @map("payment_id") @db.Uuid
-  eventType String   @map("event_type")
-  eventData Json     @map("event_data")
-  createdAt DateTime @default(now()) @map("created_at")
+  id             String   @id @default(uuid()) @db.Uuid
+  paymentId      String   @map("payment_id") @db.Uuid
+  eventType      String   @map("event_type")
+  eventData      Json     @map("event_data")
+  gatewayEventId String?  @unique @map("gateway_event_id")
+  createdAt      DateTime @default(now()) @map("created_at")
 
   payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
 
