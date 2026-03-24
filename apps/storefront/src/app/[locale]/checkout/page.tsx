@@ -9,6 +9,9 @@ import { useToast } from "@/components/shared/toast";
 import { StripeProvider } from "@/components/checkout/stripe-provider";
 import { CheckoutStepper } from "./components/checkout-stepper";
 import { CheckoutSummary } from "./components/checkout-summary";
+import { StepAddress } from "./components/step-address";
+import { StepShipping } from "./components/step-shipping";
+import { StepPayment } from "./components/step-payment";
 
 interface ShippingOption {
   id: string;
@@ -160,6 +163,8 @@ export default function CheckoutPage() {
     dispatch({ type: "SET_STEP", payload: step as 1 | 2 | 3 | 4 });
   }, []);
 
+  const isGuest = searchParams.get("guest") === "true";
+
   // Calculate totals from cart
   const subtotal = cart?.subtotal ?? 0;
   const discountAmount = cart?.discountAmount ?? null;
@@ -204,39 +209,16 @@ export default function CheckoutPage() {
           <div className="lg:col-span-8">
             {/* Step 1: Shipping Address */}
             {state.step === 1 && (
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="font-heading text-heading-md font-bold text-primary mb-4">
-                  {t("shipping.title")}
-                </h2>
-                <p className="text-body-md text-muted">
-                  Shipping address form will be implemented in Task 11
-                </p>
-              </div>
+              <StepAddress dispatch={dispatch} isGuest={isGuest} />
             )}
 
             {/* Step 2: Shipping Method */}
             {state.step === 2 && (
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="font-heading text-heading-md font-bold text-primary mb-4">
-                  {t("shipping.shippingMethod")}
-                </h2>
-                <p className="text-body-md text-muted">
-                  Shipping method selection will be implemented in Task 11
-                </p>
-              </div>
+              <StepShipping dispatch={dispatch} cartSubtotal={subtotal} />
             )}
 
             {/* Step 3: Payment */}
-            {state.step === 3 && (
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="font-heading text-heading-md font-bold text-primary mb-4">
-                  {t("payment.title")}
-                </h2>
-                <p className="text-body-md text-muted">
-                  Payment form will be implemented in Task 11
-                </p>
-              </div>
-            )}
+            {state.step === 3 && <StepPayment dispatch={dispatch} />}
 
             {/* Step 4: Review */}
             {state.step === 4 && (
